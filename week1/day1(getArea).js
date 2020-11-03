@@ -1,35 +1,35 @@
 const execution = {
     logShape: [],
-    logResult: [],
-    saveExecution: function (shape, result) {
+    logArea: [],
+    saveExecution: function (shape, area) {
         this.logShape.push(shape);
-        this.logResult.push(result);
+        this.logArea.push(area);
     },
     printExecutionSequence: function() {
         for(var i = 0; i < this.logShape.length; i++) {
-            console.log("호출함수: " + this.logShape[i] + ", 결과값: " + this.logResult[i]);
+            console.log("호출함수: " + this.logShape[i] + ", 결과값: " + this.logArea[i]);
         }
     }
 };
 
 function getArea(shape, value1, value2, value3) {
-    let result;
+    let area;
     if (shape === 'circle') {
         if (value1 < value2) {
-            result = getCircleSum(value2);
+            area = getCircleSum(value2);
         }
         else {
-            result = getCircle(value1);
+            area = getCircle(value1);
         }
     }
     else if (shape === 'rect') {
-        result = getRect(value1, value2);
+        area = getRect(value1, value2);
     }
     else if (shape === 'trapezoid') {
-        result = getTrape(value1, value2, value3);
+        area = getTrape(value1, value2, value3);
     }
-    console.log(result);
-    execution.saveExecution(shape, result);
+    console.log(area);
+    execution.saveExecution(shape, area);
 }
 
 function getCircle(radius) {
