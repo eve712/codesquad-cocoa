@@ -1,9 +1,9 @@
 const logFunc = [];
 const logResult = [];
 
-function logExecution(func, area) {
-    logFunc.push(func);
-    logResult.push(area);
+function saveExecution(shape, result) {
+    logFunc.push(shape);
+    logResult.push(result);
 }
 
 function printExecutionSequence() {
@@ -16,25 +16,24 @@ function getArea(shape, value1, value2, value3) {
     let result;
     if (shape === 'circle') {
         if (value1 < value2) {
-            getCircleSum(value2);
+            result = getCircleSum(value2);
         }
         else {
-            getCircle(value1);
+            result = getCircle(value1);
         }
     }
     else if (shape === 'rect') {
         result = getRect(value1, value2);
-        logExecution('rect', value1 * value2);
     }
     else if (shape === 'trapezoid') {
         result = getTrape(value1, value2, value3);
-        logExecution('trapezoid', (value1 + value2) * value3 / 2);
     }
+    console.log(result);
+    saveExecution(shape, result);
 }
 
 function getCircle(radius) {
-    console.log(radius * radius * 3.14);
-    logExecution('circle', radius * radius * 3.14);
+    return radius * radius * 3.14;
 }
 
 function getCircleSum(radius) {
@@ -44,8 +43,7 @@ function getCircleSum(radius) {
         result[i] = (i + 1) * (i + 1) * 3.14;
         sum += result[i];
     }
-    logExecution('circlesum', sum);
-    console.log(sum);
+    return sum;
 }
 
 function getRect (width, height) {
