@@ -1,13 +1,13 @@
 const execution = {
-    logFunc: [],
+    logShape: [],
     logResult: [],
     saveExecution: function (shape, result) {
-        this.logFunc.push(shape);
+        this.logShape.push(shape);
         this.logResult.push(result);
     },
     printExecutionSequence: function() {
         for(var i = 0; i < this.logFunc.length; i++) {
-            console.log("호출함수: " + this.logFunc[i] + ", 결과값: " + this.logResult[i]);
+            console.log("호출함수: " + this.logShape[i] + ", 결과값: " + this.logResult[i]);
         }
     }
 };
