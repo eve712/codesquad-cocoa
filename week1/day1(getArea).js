@@ -13,6 +13,7 @@ function printExecutionSequence() {
 }
 
 function getArea(shape, value1, value2, value3) {
+    let result;
     if (shape === 'circle') {
         if (value1 < value2) {
             getCircleSum(value2);
@@ -22,11 +23,11 @@ function getArea(shape, value1, value2, value3) {
         }
     }
     else if (shape === 'rect') {
-        console.log(value1 * value2);
+        result = getRect(value1, value2);
         logExecution('rect', value1 * value2);
     }
     else if (shape === 'trapezoid') {
-        console.log((value1 + value2) * value3 / 2);
+        result = getTrape(value1, value2, value3);
         logExecution('trapezoid', (value1 + value2) * value3 / 2);
     }
 }
@@ -45,6 +46,13 @@ function getCircleSum(radius) {
     }
     logExecution('circlesum', sum);
     console.log(sum);
+}
+
+function getRect (width, height) {
+    return width * height;
+}
+function getTrape (upperbase, lowerbase, height) {
+    return (upperbase + lowerbase) * height / 2;
 }
 
 // 출력
