@@ -29,7 +29,7 @@ function getArea(shape, value1, value2, value3) {
         result = getTrape(value1, value2, value3);
     }
     console.log(result);
-    saveExecution(shape, result);
+    execution.saveExecution(shape, result);
 }
 
 function getCircle(radius) {
@@ -60,4 +60,4 @@ console.log(
     getArea('trapezoid', 10, 15, 12),
     getArea('circle', 1, 3)
 );
-printExecutionSequence();
+execution.printExecutionSequence();
