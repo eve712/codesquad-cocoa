@@ -1,1 +1,1 @@
-# JS-codesquad-cocoa
+# codesquad-cocoa
