@@ -1,1 +1,0 @@
-# codesquad-cocoa
