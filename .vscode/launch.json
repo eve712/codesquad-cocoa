@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/main.js"
+            "program": "week1/day1(getArea).js"
         }
     ]
 }
