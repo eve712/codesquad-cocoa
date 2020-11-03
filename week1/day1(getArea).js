@@ -1,16 +1,16 @@
-const logFunc = [];
-const logResult = [];
-
-function saveExecution(shape, result) {
-    logFunc.push(shape);
-    logResult.push(result);
-}
-
-function printExecutionSequence() {
-    for(var i = 0; i < logFunc.length; i++) {
-        console.log("호출함수: " + logFunc[i] + ", 결과값: " + logResult[i]);
+const execution = {
+    logFunc: [],
+    logResult: [],
+    saveExecution: function (shape, result) {
+        this.logFunc.push(shape);
+        this.logResult.push(result);
+    },
+    printExecutionSequence: function() {
+        for(var i = 0; i < this.logFunc.length; i++) {
+            console.log("호출함수: " + this.logFunc[i] + ", 결과값: " + this.logResult[i]);
+        }
     }
-}
+};
 
 function getArea(shape, value1, value2, value3) {
     let result;
