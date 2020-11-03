@@ -6,7 +6,7 @@ const execution = {
         this.logResult.push(result);
     },
     printExecutionSequence: function() {
-        for(var i = 0; i < this.logFunc.length; i++) {
+        for(var i = 0; i < this.logShape.length; i++) {
             console.log("호출함수: " + this.logShape[i] + ", 결과값: " + this.logResult[i]);
         }
     }
@@ -37,11 +37,11 @@ function getCircle(radius) {
 }
 
 function getCircleSum(radius) {
-    var result = [];
-    var sum = 0;
+    let circleArr = [];
+    let sum = 0;
     for(var i = 0; i < radius; i++) {
-        result[i] = (i + 1) * (i + 1) * 3.14;
-        sum += result[i];
+        circleArr[i] = (i + 1) * (i + 1) * 3.14;
+        sum += circleArr[i];
     }
     return sum;
 }
