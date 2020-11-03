@@ -14,19 +14,21 @@ const execution = {
 
 function getArea(shape, value1, value2, value3) {
     let area;
-    if (shape === 'circle') {
-        if (value1 < value2) {
-            area = getCircleSum(value2);
-        }
-        else {
-            area = getCircle(value1);
-        }
-    }
-    else if (shape === 'rect') {
-        area = getRect(value1, value2);
-    }
-    else if (shape === 'trapezoid') {
-        area = getTrape(value1, value2, value3);
+    switch (shape) {
+        case 'circle':
+            if (value1 < value2) {
+                area = getCircleSum(value2);
+            }
+            else {
+                area = getCircle(value1);
+            }
+            break;
+        case 'rect':
+            area = getRect(value1, value2);
+            break;
+        case 'trapezoid':
+            area = getTrape(value1, value2, value3);
+            break;
     }
     console.log(area);
     execution.saveExecution(shape, area);
