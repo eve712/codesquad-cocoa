@@ -43,11 +43,26 @@ function numberRemv(item) {
 
 console.log(filterId(peoples));   // ['honux', 'head', 'zello', 'lucas']
 //----------------------------------------------
+
 const grades = [[88,76,77], [33,44,44], [90,100,94], [30,44,98]];
 
-// 각 학생의 평균 점수 구하기
-let averageGrade = grades.map(item => {
-    const sum = item.reduce((a, b) => a + b);
-    return sum / item.length;
+// 각 학생의 평균 점수 배열
+let getAverageGrade = grades.map(average);
+
+// 각 학생들의 가장 높은 점수들의 배열
+let highestGrade = grades.map((item) => {
+    item.sort((a, b) => b - a);
+    return item[0];
 });
-console.log(averageGrade);
+
+// 배열 원소들의 평균값 구하는 함수
+function average(arr) {
+    const sum = arr.reduce((prev, curr) => prev + curr);
+    return sum / arr.length;
+}
+
+console.log(getAverageGrade);
+console.log(average(highGrade));
+//----------------------------------------------
+
+
