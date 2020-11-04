@@ -8,10 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "프로그램 시작",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "week1/day1(getArea).js"
+            "program": "${file}" , 
+            "env": { "NODE_ENV": "development" } 
         }
     ]
 }
