@@ -1,7 +1,6 @@
 
 // n진법 수로 바꾼 수들의 배열이 들어가 있는 배열 
 let resultArray = [];
-let pthAnswer = [];
 
 // n진수, t개의 숫자까지, m명이 말하고, p번째
 function solution(n, t, m, p) {
@@ -18,10 +17,12 @@ function solution(n, t, m, p) {
         return resultArray;
     }
 }
+console.log(solution(2, 4, 2));
 console.log(solution(2, 4, 2, 2));
 
 // p번째 차례의 답 구하는 함수
 function getPthAnswer(m, p) {
+    let pthAnswer = [];
     for (let i = p - 1; i < resultArray.length; i += m) {
         pthAnswer += resultArray[i];
     }
