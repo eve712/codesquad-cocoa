@@ -14,7 +14,7 @@ function calculate(n) {
     return factorialArray;
 }
 
-console.log(calculate(4)); // 1, 2, 6, 24
+console.log(calculate(4)); 
 
 //----------------------------------
 
@@ -42,7 +42,7 @@ function numberRemv(item) {
     return item;
 }
 
-console.log(filterId(peoples));   // ['honux', 'head', 'zello', 'lucas']
+console.log(filterId(peoples));   
 
 //----------------------------------
 
