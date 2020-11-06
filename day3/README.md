@@ -17,6 +17,7 @@
 3. callback 함수
 4. 재귀함수
 5. 고차함수   
+1. set, met
 6. arrow function
 7. 정규표현식 RegExp (중요도 중간)
 8. class
