@@ -30,12 +30,22 @@
    - cond and fix 보다는 design and code
    - 가설(설계) → 검증 → 디버깅의 반복
    - 순서도 그려보기
+   - 패턴 찾기 (경우의 수 나열 / 공식, 패턴을 찾아보자)
+2. 프로그래밍 연습
+   - 시간정하기, 다시 풀기, 정리하기
 2. 생성자 → prototype → class 
    - 생성자는 메서드 중복(메모리 비효율적 사용) 문제가 있음
    - class는 비슷한 기능(함수)끼리 묶어주기, 모아서 관리(응집도)
 3. forEach로 표현력 상승 
    - [].forEach(callback);
    - [].map().filter().forEach() ➔ method chaining
+   ```javascript
+   [1,2,3].filter(odd).forEach(sendLog);
+   [1,2,3]
+      .filter(odd)
+      .forEach(sendLog)
+      .print(v);
+   ```
 4. 디버깅이 유리한 코드가 좋은 코드
    - watch에 바로 보일 수 있게
    - function(function()); 보다는 variable = function(); function(variable);
