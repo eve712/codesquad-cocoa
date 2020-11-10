@@ -52,9 +52,6 @@ class HashMap {
             }
         }
     }
-    filterEmpty(item) {
-        if (item !== undefined) return true;
-    }
 
     // 전체 아이템 개수 리턴
     size() {
@@ -90,6 +87,9 @@ class HashMap {
                 return item[key];
             }
         }
+    }
+    filterEmpty(item) {
+        if (item !== undefined) return true;
     }
 
     // 해당 키를 가진 map 배열의 index 리턴
