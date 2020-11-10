@@ -89,7 +89,7 @@ class HashMap {
         }   
     }
 
-    // 해당 키 값 삭제 = 해당 키가 있는 index를 찾아서 this.map[index] 원소 삭제 splice
+    // 해당 키 삭제
     remove(key) {
         let index = this.getHash(key);
         while(true) {
@@ -98,7 +98,7 @@ class HashMap {
                 return;
             }
             else if(Object.keys(this.map[index])[0] === key) {
-                this.map.splice(index, 1);
+                delete this.map[index];
                 this.count--;
                 let idx = this.keys.indexOf(key);
                 if (idx > -1) this.keys.splice(idx, 1);
@@ -111,7 +111,7 @@ class HashMap {
         } 
     }
 
-    // key에 새로운 value 대체
+    // key에 새로운 value로 변경
     replace(key, value) {
         let index = this.remove(key);
         if (index === undefined) {
@@ -131,7 +131,7 @@ class HashMap {
 
     // 전체 맵 초기화
     clear() {
-
+        this.map = [];
     }
 }
 
@@ -148,5 +148,7 @@ console.log(myHashMap.map);
 //console.log(myHashMap.containsKey('me'));   // true
 //console.log(myHashMap.containsKey('mola')); // false
 //console.log(myHashMap.get('me')); // eve
+//myHashMap.replace('want', 'coffee');
+myHashMap.remove('class2');
 myHashMap.replace('want', 'coffee');
 console.log(myHashMap.map);
