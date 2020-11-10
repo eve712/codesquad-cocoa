@@ -56,17 +56,6 @@ class HashMap {
         if (item !== undefined) return true;
     }
 
-    // 해당 키의 속성값 리턴
-    // 수정해야함
-    get(key) {
-        let arr = this.map.filter(this.filterEmpty);
-        for(let item of arr) {
-            if(Object.keys(item) === [key]) {
-                return item[key];
-            }
-        }
-    }
-
     // 전체 아이템 개수 리턴
     size() {
         return this.count;
@@ -92,6 +81,16 @@ class HashMap {
     // 값을 다시 찾아올 때 for문을 돌리면 해시맵으로서의 장점이 사라지는데 방법을 모르겠음
     // ➔ 수업, 다른 분들 코드보기
     
+    // 해당 키의 속성값 리턴
+    // 수정해야함
+    get(key) {
+        let arr = this.map.filter(this.filterEmpty);
+        for(let item of arr) {
+            if(Object.keys(item)[0] === key) {
+                return item[key];
+            }
+        }
+    }
 
     // 해당 키를 가진 map 배열의 index 리턴
     getIndex(key) {
