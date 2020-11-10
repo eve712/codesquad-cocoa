@@ -89,34 +89,39 @@ class HashMap {
         }   
     }
 
-
-    // 이 밑은 다시 해야 됨
-    //-----------------------------------------------------
-    // 값을 다시 찾아올 때 for문을 돌리면 해시맵으로서의 장점이 사라지는데 방법을 모르겠음
-    // ➔ 수업, 다른 분들 코드보기
-
-    // 해당 키를 가진 map 배열의 index 리턴
-    getIndex(key) {
-        for(let i = 0; i < this.map.length; i++) {
-            if(this.map[i][key]) {
-                return i;
-            }
-        }
-        return  -1;
-    }
-
     // 해당 키 값 삭제 = 해당 키가 있는 index를 찾아서 this.map[index] 원소 삭제 splice
     remove(key) {
-        let index = this.getIndex(key);
-        this.map.splice(index, 1);
-        this.count--;
-        let idx = this.keys.indexOf(key);
-        if (idx > -1) this.keys.splice(idx, 1);
+        let index = this.getHash(key);
+        while(true) {
+            if(this.map[index] === undefined) {
+                console.log(`${key}는 저장되지 않은 key입니다.`);
+                return;
+            }
+            else if(Object.keys(this.map[index])[0] === key) {
+                this.map.splice(index, 1);
+                this.count--;
+                let idx = this.keys.indexOf(key);
+                if (idx > -1) this.keys.splice(idx, 1);
+                return index;
+            }
+            else {
+                index += this.getStepHash(key);
+                index = index > this.tableSize ? index - this.tableSize : index;
+            }
+        } 
     }
 
-    // 키-값으로 기존 값을 대체
+    // key에 새로운 value 대체
     replace(key, value) {
-
+        let index = this.remove(key);
+        if (index === undefined) {
+            console.log(`대체할 기존 값이 없습니다.`);
+        }
+        else {
+            let item = {[key] : value};
+            // 원하는 인덱스에 원소 밀어넣기
+            this.map.splice(index, 0, item);
+        }
     }
 
     // 비어있는 맵인지 boolean값
@@ -138,8 +143,10 @@ myHashMap.put('teacher', 'crong');
 myHashMap.put('pet', 'taengja');
 myHashMap.put('want', 'sleep');
 console.log(myHashMap.map);
-console.log(myHashMap.size());
-console.log(myHashMap.getKeys()); 
-console.log(myHashMap.containsKey('me'));   // true
-console.log(myHashMap.containsKey('mola')); // false
-console.log(myHashMap.get('me')); // eve
+//console.log(myHashMap.size());
+//console.log(myHashMap.getKeys()); 
+//console.log(myHashMap.containsKey('me'));   // true
+//console.log(myHashMap.containsKey('mola')); // false
+//console.log(myHashMap.get('me')); // eve
+myHashMap.replace('want', 'coffee');
+console.log(myHashMap.map);
