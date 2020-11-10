@@ -124,11 +124,6 @@ class HashMap {
         }
     }
 
-    // 비어있는 맵인지 boolean값
-    isEmpty() {
-
-    }
-
     // 전체 맵 초기화
     clear() {
         this.map = [];
@@ -143,12 +138,10 @@ myHashMap.put('teacher', 'crong');
 myHashMap.put('pet', 'taengja');
 myHashMap.put('want', 'sleep');
 console.log(myHashMap.map);
-//console.log(myHashMap.size());
-//console.log(myHashMap.getKeys()); 
-//console.log(myHashMap.containsKey('me'));   // true
-//console.log(myHashMap.containsKey('mola')); // false
-//console.log(myHashMap.get('me')); // eve
-//myHashMap.replace('want', 'coffee');
+console.log(myHashMap.size());
+console.log(myHashMap.containsKey('me'));   // true
+console.log(myHashMap.containsKey('mola')); // false
+console.log(myHashMap.get('me')); // eve
 myHashMap.remove('class2');
 myHashMap.replace('want', 'coffee');
 console.log(myHashMap.map);
