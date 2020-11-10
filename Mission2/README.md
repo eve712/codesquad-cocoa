@@ -1,4 +1,4 @@
-# 코드스쿼드 코코아 day3
+# 코드스쿼드 코코아 Mission2
 ## Checkpoint
 - Mission1
 1. 진법에 대해서 이해하고 있다.
