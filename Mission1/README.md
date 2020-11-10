@@ -1,4 +1,4 @@
-# 코드스쿼드 코코아 day1 
+# 코드스쿼드 코코아 Mission1 
 ## Checkpoint
 1. Node.js를 통해서 JavaScript 개발을 할 수 있다.
 2. 함수의 역할은 한 가지에 집중하고 있다.
