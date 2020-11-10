@@ -71,26 +71,29 @@ class HashMap {
         return false;
     }
 
+    // 해당 키의 속성값 리턴
+    get(key) {
+        let index = this.getHash(key);
+        while(true) {
+            if(this.map[index] === undefined) {
+                console.log(`${key}는 저장되지 않은 key입니다.`);
+                return;
+            }
+            else if(Object.keys(this.map[index])[0] === key) {
+                return this.map[index][key];
+            }
+            else {
+                index += this.getStepHash(key);
+                index = index > this.tableSize ? index - this.tableSize : index;
+            }
+        }   
+    }
 
 
     // 이 밑은 다시 해야 됨
     //-----------------------------------------------------
     // 값을 다시 찾아올 때 for문을 돌리면 해시맵으로서의 장점이 사라지는데 방법을 모르겠음
     // ➔ 수업, 다른 분들 코드보기
-    
-    // 해당 키의 속성값 리턴
-    // 수정해야함
-    get(key) {
-        let arr = this.map.filter(this.filterEmpty);
-        for(let item of arr) {
-            if(Object.keys(item)[0] === key) {
-                return item[key];
-            }
-        }
-    }
-    filterEmpty(item) {
-        if (item !== undefined) return true;
-    }
 
     // 해당 키를 가진 map 배열의 index 리턴
     getIndex(key) {
@@ -139,4 +142,4 @@ console.log(myHashMap.size());
 console.log(myHashMap.getKeys()); 
 console.log(myHashMap.containsKey('me'));   // true
 console.log(myHashMap.containsKey('mola')); // false
-myHashMap.get('want');
+console.log(myHashMap.get('me')); // eve
