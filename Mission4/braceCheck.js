@@ -90,8 +90,8 @@ class Node {
     main (string, node) {
         let pureArr = this.getPureArr(string);   
         let arrayInfo = this.getNode(pureArr, node);
-        let d = JSON.stringify(arrayInfo, null, '\t');
-        console.log(d);
+        let print = JSON.stringify(arrayInfo, null, '\t');
+        console.log(print);
     }
 }
 
