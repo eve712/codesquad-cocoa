@@ -1,3 +1,4 @@
+// 괄호 문법 검사기
 const inspector = {
     getDataArr (string) {
         return string.split('');
@@ -50,6 +51,9 @@ const inspector = {
     }
 };
 
+//---------------------------
+// 3번 - 배열 분석 정보 출력
+
 class Node {
     constructor(type = "root", value = null) {
         this.type = type;
@@ -95,26 +99,16 @@ class Node {
     }
 }
 
-// ----test----
+//--------------/test/---------------
 const data_1 = "[1, 2, [3]]";
 let node = new Node();
  node.main(data_1, node);
 
 const data_2 = "[1, [2], 3]";
-let node2 = new Node();
-// node2.main(data_2, node2);
-
-
-
-
-
-
-
-
+//다시 윗 단계로 빠질 때는 어떻게 해야 될까...
 
 
 //--------------/test/---------------
-/*
 const data = "[1, 2, [3]]";
 inspector.main(data);
 
@@ -122,9 +116,3 @@ console.log("---------------");
 
 const data2 = "[1,2,[3,4,[5,[6]]";
 inspector.main(data2);
-
-console.log("---------------");
-
-const data3 = "[1,2,[3,4,[5,[6]]]]";
-inspector.main(data3);
-*/
