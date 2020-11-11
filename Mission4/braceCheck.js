@@ -51,7 +51,7 @@ const inspector = {
 };
 
 class Node {
-    constructor(type = "root", value = "null") {
+    constructor(type = "root", value = null) {
         this.type = type;
         this.value = value;
         this.child = [];
