@@ -55,7 +55,7 @@ const inspector = {
 // 3번 - 배열 분석 정보 출력
 
 class Node {
-    constructor(type = "root", value = null) {
+    constructor(type = "root", value) {
         this.type = type;
         this.value = value;
         this.child = [];
