@@ -13,7 +13,6 @@ const inspector = {
             if(brace === '[') {
                 stack.push(brace);
             }
-            // if(braceArr[0] === ']') 여러 괄호를 검사하려면 else if 아니면 switch
             else {
                 if(lastItem === '[') {
                     stack.pop();
@@ -54,6 +53,17 @@ const inspector = {
 //---------------------------
 // 3번 - 배열 분석 정보 출력
 
+// 1. 괄호, 숫자만 걸러서 배열로 만들기
+// 2. 위 배열을 앞에서부터 하나씩 참조
+// 3. '[' 여는 괄호일 때 
+//      → shift로 첫 번째 원소 제거, new Node("array"), child에 push, 재귀로 반복!
+//      → 재귀로 반복할 때 새로 생성한 객체를 인자로 넣어서 반복해야 함. 
+// 4. ']' 닫는 괄호일 때
+//      → shift, 재귀로 반복 
+// 5. 숫자 일 때 
+//      → shift, new Node("number", value), child에 push, 재귀로 반복
+// 6. 모두 shift해서 배열의 길이가 0이면 종료.
+
 class Node {
     constructor(type = "root", value) {
         this.type = type;
@@ -64,10 +74,12 @@ class Node {
         return item === '[' || item === ']' || 
             (typeof parseInt(item) === 'number' && isFinite(parseInt(item)) );
     }
+    // 괄호, 숫자만 있는 배열 반환
     getPureArr(string) {
         let dataArr = inspector.getDataArr(string);
         return dataArr.filter(this.braceNumFilter);
     }
+    // 배열 정보 분석해주는 함수
     getNode(pureArr, node) {
         let currItem = pureArr[0];
         if(currItem === '[') {
@@ -81,7 +93,7 @@ class Node {
             this.getNode(pureArr, node);
         }
         else if(pureArr.length === 0) {
-            return node;
+            return;
         }
         else {
             pureArr.shift();
@@ -91,6 +103,7 @@ class Node {
         }
         return node;
     }
+    // 분석한 것을 콘솔에 출력
     main (string, node) {
         let pureArr = this.getPureArr(string);   
         let arrayInfo = this.getNode(pureArr, node);
@@ -102,7 +115,7 @@ class Node {
 //--------------/test/---------------
 const data_1 = "[1, 2, [3]]";
 let node = new Node();
- node.main(data_1, node);
+node.main(data_1, node);
 
 const data_2 = "[1, [2], 3]";
 //다시 윗 단계로 빠질 때는 어떻게 해야 될까...
