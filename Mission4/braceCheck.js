@@ -98,7 +98,12 @@ class Node {
 // ----test----
 const data_1 = "[1, 2, [3]]";
 let node = new Node();
-node.main(data_1, node);
+ node.main(data_1, node);
+
+const data_2 = "[1, [2], 3]";
+let node2 = new Node();
+// node2.main(data_2, node2);
+
 
 
 
