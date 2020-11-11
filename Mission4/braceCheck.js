@@ -50,7 +50,65 @@ const inspector = {
     }
 };
 
-//---------------------
+class Node {
+    constructor(type = "root", value = "null") {
+        this.type = type;
+        this.value = value;
+        this.child = [];
+    }
+    braceNumFilter(item) {
+        return item === '[' || item === ']' || 
+            (typeof parseInt(item) === 'number' && isFinite(parseInt(item)) );
+    }
+    getPureArr(string) {
+        let dataArr = inspector.getDataArr(string);
+        return dataArr.filter(this.braceNumFilter);
+    }
+    getNode(pureArr, node) {
+        let currItem = pureArr[0];
+        if(currItem === '[') {
+            pureArr.shift();
+            let arrNode = new Node("array");
+            node.child.push(arrNode);
+            this.getNode(pureArr, arrNode);
+        }
+        else if(currItem === ']') {
+            pureArr.shift();
+            this.getNode(pureArr, node);
+        }
+        else if(pureArr.length === 0) {
+            return node;
+        }
+        else {
+            pureArr.shift();
+            let numNode = new Node("number", currItem);
+            node.child.push(numNode);
+            this.getNode(pureArr, node);
+        }
+        return node;
+    }
+    main (string, node) {
+        let pureArr = this.getPureArr(string);   
+        let arrayInfo = this.getNode(pureArr, node);
+        console.log(arrayInfo);
+    }
+}
+
+// ----test----
+const data_1 = "[1, 2, [3]]";
+let node = new Node();
+node.main(data_1, node);
+
+
+
+
+
+
+
+
+
+//--------------/test/---------------
+/*
 const data = "[1, 2, [3]]";
 inspector.main(data);
 
@@ -63,3 +121,4 @@ console.log("---------------");
 
 const data3 = "[1,2,[3,4,[5,[6]]]]";
 inspector.main(data3);
+*/
