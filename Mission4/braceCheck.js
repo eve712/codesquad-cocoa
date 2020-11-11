@@ -19,13 +19,11 @@ const inspector = {
                 }
                 else {
                     console.log('여는 괄호가 일치하지 않습니다.');
-                    return false;
                 }
             }
         }
         if (stack.length !== 0) {
             console.log('닫는 괄호가 일치하지 않습니다.');
-            return false;
         }
         else {
             console.log('괄호 매칭이 맞습니다!');
@@ -35,12 +33,6 @@ const inspector = {
     commaFilter(item) {
         return item === ',';
     },
-
-    errorChecker(string) {
-        const dataArr = this.getDataArr(string);
-        const braceArr = dataArr.filter(this.braceFilter);
-        this.braceChecker(braceArr);
-    },
     printInfo(string) {
         const dataArr = this.getDataArr(string);
         const braceArr = dataArr.filter(this.braceFilter);
@@ -48,10 +40,26 @@ const inspector = {
         console.log(
             `깊이 수준은 ${braceArr.length/2}이며, 총 ${commaArr.length + 1}개의 원소가 포함되어 있습니다.`
         );
+    },
+    main(string) {
+        const dataArr = this.getDataArr(string);
+        const braceArr = dataArr.filter(this.braceFilter);
+        if (this.braceChecker(braceArr)) {
+            this.printInfo(string);
+        }
     }
 };
 
-//----------------
-const data = "[1, 2, [[3]]";
-inspector.errorChecker(data);
-inspector.printInfo(data);
+//---------------------
+const data = "[1, 2, [3]]";
+inspector.main(data);
+
+console.log("---------------");
+
+const data2 = "[1,2,[3,4,[5,[6]]";
+inspector.main(data2);
+
+console.log("---------------");
+
+const data3 = "[1,2,[3,4,[5,[6]]]]";
+inspector.main(data3);
