@@ -1,4 +1,4 @@
-const brace = {
+const inspector = {
     getDataArr (string) {
         return string.split('');
     },
@@ -35,12 +35,13 @@ const brace = {
     commaFilter(item) {
         return item === ',';
     },
-    main(string) {
+
+    errorChecker(string) {
         const dataArr = this.getDataArr(string);
         const braceArr = dataArr.filter(this.braceFilter);
         this.braceChecker(braceArr);
     },
-    main2(string) {
+    printInfo(string) {
         const dataArr = this.getDataArr(string);
         const braceArr = dataArr.filter(this.braceFilter);
         const commaArr = dataArr.filter(this.commaFilter);
@@ -52,5 +53,5 @@ const brace = {
 
 //----------------
 const data = "[1, 2, [[3]]";
-brace.main(data);
-brace.main2(data);
+inspector.errorChecker(data);
+inspector.printInfo(data);
