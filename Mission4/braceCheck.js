@@ -1,5 +1,7 @@
 // 괄호 문법 검사기
 const inspector = {
+    depth: 0,
+    maxDepth: 0,
     getDataArr (string) {
         return string.split('');
     },
@@ -8,14 +10,18 @@ const inspector = {
     },
     braceChecker(braceArr) {
         let stack = [];
+        this.maxDepth = 0;
         for(let brace of braceArr) {
             let lastItem = stack[stack.length - 1];
             if(brace === '[') {
                 stack.push(brace);
+                this.depth++;
+                this.maxDepth = this.maxDepth < this.depth ? this.depth : this.maxDepth;
             }
             else {
                 if(lastItem === '[') {
                     stack.pop();
+                    this.depth--;
                 }
                 else {
                     console.log('여는 괄호가 일치하지 않습니다.');
@@ -35,10 +41,10 @@ const inspector = {
     },
     printInfo(string) {
         const dataArr = this.getDataArr(string);
-        const braceArr = dataArr.filter(this.braceFilter);
         const commaArr = dataArr.filter(this.commaFilter);
+        const depth = inspector.maxDepth;
         console.log(
-            `깊이 수준은 ${braceArr.length/2}이며, 총 ${commaArr.length + 1}개의 원소가 포함되어 있습니다.`
+            `깊이 수준은 ${depth}이며, 총 ${commaArr.length + 1}개의 원소가 포함되어 있습니다.`
         );
     },
     main(string) {
@@ -122,6 +128,8 @@ const data_2 = "[1, [2], 3]";
 
 
 //--------------/test/---------------
+console.log("---------------");
+
 const data = "[1, 2, [3]]";
 inspector.main(data);
 
