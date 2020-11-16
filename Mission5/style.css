@@ -51,29 +51,46 @@
     margin: 2.6rem 0;
 }
 #list > li {
+    height: 4rem;
     border: 2px solid #ddd;
     border-style: solid solid none solid;
     border-radius: 4px;
     box-sizing: border-box;
+    /* i요소 위치 배치 기준 */
+    position: relative;
 }
 #list > li:last-child {
     border-style: solid;
 }
-#list > li > label {
+.label {
+    /* border: 1px solid red; */
     display: block;
     box-sizing: border-box;
-    padding: 1.3rem 0.8rem;
+    width: 40rem;
+    margin: 0.7rem 0;
+    padding: 0.5rem 0.8rem;
     cursor: pointer;
-    position: relative;
 }
-#list > li > label > i {
-    font-size: 1.2rem;
-    color: rgb(192, 0, 0);
+#list > li > div {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
     position: absolute;
-    right: 3rem;
+    top: 0.4rem;
+    right: 1.5rem;
     cursor: pointer;
 }
-.check {
+#list > li > div:hover {
+    background-color: rgb(255, 147, 147);
+    transition: 0.3s;
+}
+#list > li > div > i {
+    font-size: 1.2rem;
+    color: rgb(216, 14, 14);
+    line-height: 3rem;
+    padding-left: 1rem;
+}
+.label > input {
     margin-left: 1rem;
     margin-right: 2.3rem;
 }
