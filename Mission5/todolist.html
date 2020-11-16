@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        #header {
+            height: 4.2rem;
+            background-color: #222;
+            padding-left: 2rem;
+            
+            font-size: 1.6em;
+            font-weight: 300;
+            color: #bbb;
+            line-height: 4.2rem;
+        }
+        #container {
+            /* 600px */
+            width: 45rem; 
+            padding-top: 2.5rem;
+            margin: 0 auto;
+        }
+        #container > h1 {
+            font-size: 2em;
+            color: #444;
+            padding: 2rem 0;
+        }
+        #addList {
+            padding: 0 4.6rem;
+        }
+        #addList > input[type="text"] {
+            width: 30rem;
+            height: 2rem;
+            box-sizing: border-box;
+            padding: 0 1rem;
+            margin: 0 2rem 0 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+        }
+        #addList > input[type="submit"] {
+            width: 3rem;
+            height: 2rem;
+            padding: 0;
+            border: none;
+            border-radius: 4px;
+            background-color: rgb(48, 141, 184);
+            color: #fff;
+            font-weight: 300;
+        }
+        #list {
+            margin: 2.6rem 0;
+        }
+        #list > li {
+            border: 2px solid #ddd;
+            border-style: solid solid none solid;
+            border-radius: 4px;
+            box-sizing: border-box;
+            padding: 1.3rem 0.8rem;
+        }
+        #list > li:last-child {
+            border-style: solid;
+        }
+        .check {
+            margin-left: 1rem;
+            margin-right: 2.3rem;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        To Do List
+    </header>
+
+    <section id="container">
+        <h1>To Do List</h1>
+
+        <!-- ●●●form 수정 필요 -->
+        <form action="/server/program" method="post" id="addList">
+            <input type="text" name="todo" placeholder="New Task">
+            <input type="submit" name="add" value="Add">
+        </form>
+
+        <!-- to do list -->
+        <ul id="list">
+            <li>
+                <label>
+                    <input type="checkbox" name="done" class="check"> 
+                    First Item
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="done" class="check">
+                    Second Item
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="done" class="check">
+                    Third Item
+                </label>
+            </li>
+        </ul>
+    </section>
+</body>
+</html>
