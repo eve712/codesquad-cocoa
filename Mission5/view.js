@@ -20,6 +20,17 @@ class View {
         this.createListItem(value);
         this.listItems = document.querySelectorAll('#list > li');
     }
+    makeLineThrough() {
+        for(let item of view.listItems) {
+            let checkbox = item.firstElementChild.firstElementChild;
+            if(checkbox.checked) {
+                checkbox.nextElementSibling.style.textDecoration = "line-through";
+            }
+            else {
+                checkbox.nextElementSibling.removeAttribute("style");
+            }
+        }
+    }
 }
 
 // test
@@ -27,15 +38,4 @@ let view = new View();
 
 view.addButton.addEventListener("click", view.addList.bind(view));
 
-
-
-/*
-for(let listItem of view.listItems) {
-    listItem.addEventListener("click", function() {
-        const checkbox = this.firstElementChild.firstElementChild;
-        if(checkbox.checked) {
-            checkbox.nextElementSibling.style.textDecoration = "line-through";
-        }
-    });
-}
-*/
+view.list.addEventListener("click", view.makeLineThrough.bind(view));
