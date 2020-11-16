@@ -26,11 +26,13 @@
         <!-- to do list -->
         <ul id="list">
             <li>
-                <label>
-                    <input type="checkbox" name="done" class="check">
+                <label class="label">
+                    <input type="checkbox" name="done">
                     <span>data1</span>
-                    <i class="fas fa-trash-alt" class="remove"></i>
                 </label>
+                <div class="remove">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
             </li>
         </ul>
     </section>
@@ -38,11 +40,13 @@
     <!-- #list에 복제할 template -->
     <template id="template">
         <li>
-            <label>
-                <input type="checkbox" name="done" class="check">
+            <label class="label">
+                <input type="checkbox" name="done">
                 <span></span>
-                <i class="fas fa-trash-alt" class="remove"></i>
             </label>
+            <div class="remove">
+                <i class="fas fa-trash-alt"></i>
+            </div>
         </li>
     </template>
 
