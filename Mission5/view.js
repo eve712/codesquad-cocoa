@@ -1,4 +1,4 @@
-// todolist처리
+
 class View {
     constructor() {
         this.inputText = document.getElementById('inputText');
@@ -19,9 +19,8 @@ class View {
         this.inputText.value = '';
         this.inputText.focus();
     }
-    makeLineThrough(e) {
-        let checkbox = e.target.firstElementChild;
-        console.log(checkbox);
+    makeLineThrough(eventTarget) {
+        let checkbox = eventTarget.firstElementChild;
         if(!checkbox.checked) {
             checkbox.nextElementSibling.style.textDecoration = "line-through";
         }
@@ -29,8 +28,8 @@ class View {
             checkbox.nextElementSibling.removeAttribute("style");
         }
     }
-    removeListItem(e) {
-        e.target.parentElement.parentElement.remove();
+    removeListItem(eventTarget) {
+        eventTarget.parentElement.parentElement.remove();
     }
 }
 let view = new View();
@@ -40,7 +39,8 @@ view.addButton.addEventListener("click", view.addList.bind(view));
 
 // 2. label 클릭 → 체크상태따라 취소선 / i 클릭 → 요소 삭제
 view.list.addEventListener("click", function(e) {
-    if(e.target.nodeName === 'LABEL') { view.makeLineThrough(e); }
-    if(e.target.nodeName === 'I') { view.removeListItem(e); }
+    let eventTarget = e.target;
+    if(eventTarget.nodeName === 'LABEL') { view.makeLineThrough(eventTarget); }
+    if(eventTarget.nodeName === 'I') { view.removeListItem(eventTarget); }
 });
 
