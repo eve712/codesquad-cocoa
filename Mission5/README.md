@@ -11,9 +11,9 @@
    - stopPropagation, preventDefault
 3. Event Delegation(이벤트 위임)
 4. this (클래스 내, 이벤트핸들러 내)
-5. HTML \<template>
-6. 문자열에 template 리터럴로 HTML 만들어서 forEach, map
-7. bind()
+5. bind()메서드, binding 개념
+6. HTML \<template>
+7. 문자열에 template 리터럴로 HTML 만들어서 forEach, map
 8. Local Storage
 9. node vs element
 10. destructuring으로 지정 객체만 받기
