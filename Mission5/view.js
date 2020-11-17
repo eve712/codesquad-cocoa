@@ -1,4 +1,3 @@
-
 class View {
     constructor() {
         this.inputText = document.getElementById('inputText');
