@@ -16,17 +16,21 @@ class View {
     addList() {
         let value = this.inputText.value;
         this.createListItem(value);
+        this.inputText.value = '';
+        this.inputText.focus();
     }
-    makeLineThrough() {
-        for(let item of view.listLabels) {
-            let checkbox = item.firstElementChild;
-            if(!checkbox.checked) {
-                checkbox.nextElementSibling.style.textDecoration = "line-through";
-            }
-            else {
-                checkbox.nextElementSibling.removeAttribute("style");
-            }
+    makeLineThrough(e) {
+        let checkbox = e.target.firstElementChild;
+        console.log(checkbox);
+        if(!checkbox.checked) {
+            checkbox.nextElementSibling.style.textDecoration = "line-through";
         }
+        else {
+            checkbox.nextElementSibling.removeAttribute("style");
+        }
+    }
+    removeListItem(e) {
+        e.target.parentElement.parentElement.remove();
     }
 }
 let view = new View();
@@ -36,17 +40,7 @@ view.addButton.addEventListener("click", view.addList.bind(view));
 
 // 2. label 클릭 → 체크상태따라 취소선 / i 클릭 → 요소 삭제
 view.list.addEventListener("click", function(e) {
-    if(e.target.nodeName === 'I') {
-        e.target.parentElement.parentElement.remove();
-    }
-    if(e.target.nodeName === 'LABEL') {
-        view.makeLineThrough();
-    }
+    if(e.target.nodeName === 'LABEL') { view.makeLineThrough(e); }
+    if(e.target.nodeName === 'I') { view.removeListItem(e); }
 });
 
-
-
-
-
-// view.list.addEventListener("click", view.makeLineThrough.bind(view));
-// 이렇게 했을 때는 (checkbox.checked)로 해야 됨.
