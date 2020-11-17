@@ -4,7 +4,6 @@ class View {
         this.inputText = document.getElementById('inputText');
         this.addButton = document.getElementById('addButton');
         this.list = document.getElementById('list');
-        this.listLabels = document.getElementsByClassName('label');
     }
     createListItem (value) {
         const template = document.getElementById('template');

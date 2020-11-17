@@ -26,3 +26,12 @@
 2. 클래스 parameter를 잘 활용하도록
 3. 이벤트 객체는 큰 객체이므로 필요한 것만 parameter로 받을 수 있도록.
 4. 2개 이상 중복은 변수에 저장!
+   
+5. 설계하는 시간이 중요!!! 주석으로 정리하면서 하는 것도 좋음.
+6. 시나리오 → feature 정리 → skeleton code(뼈대) 작성
+7. 이벤트 객체 개발자 도구에서 확인 가능(Scope → Local)
+8. 클래스 간 통신(의존성)을 낮춰주기 위한 방법들
+   - 밖에서 DOM참조, constructor에 parameter로 전달 ( → DOM 의존성 낮아짐)
+   - parameter로 함수 전달( → 함수 의존성 낮아짐)
+   - 중재자 역할의 Mediater Class 생성
+  
