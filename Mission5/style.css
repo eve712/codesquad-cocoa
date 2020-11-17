@@ -78,17 +78,13 @@
     position: absolute;
     top: 0.4rem;
     right: 1.5rem;
-    cursor: pointer;
-}
-#list > li > div:hover {
-    background-color: rgb(255, 147, 147);
-    transition: 0.3s;
 }
 #list > li > div > i {
     font-size: 1.2rem;
     color: rgb(216, 14, 14);
     line-height: 3rem;
     padding-left: 1rem;
+    cursor: pointer;
 }
 .label > input {
     margin-left: 1rem;
