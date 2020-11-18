@@ -90,3 +90,6 @@
     margin-left: 1rem;
     margin-right: 2.3rem;
 }
+.taskText {
+    text-decoration: line-through;
+}
