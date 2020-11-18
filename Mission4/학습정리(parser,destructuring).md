@@ -8,7 +8,7 @@
 2. lexer
 3. parser
 
-![parsing] (https://jsnow.netlify.app/static/61f172259a28777c1db7c766d6354072/1d69c/parser.png)
+![parsing](https://jsnow.netlify.app/static/61f172259a28777c1db7c766d6354072/1d69c/parser.png)
 
 **tokenizer**는 input을 알맞은 토큰 단위로 나눠주고, <br>
 **lexer**는 나눠진 토큰들을 분석해 문맥적 의미를 부여한다. <br> 
