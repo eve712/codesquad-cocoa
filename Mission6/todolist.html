@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <script defer src="todolist.js"></script>
+    <script src="https://kit.fontawesome.com/28cb4afd47.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="todolist.css">
+</head>
+<body>
+    <header id="header">
+        To Do List
+    </header>
+
+    <section id="container">
+        <h1>To Do List</h1>
+
+        <form action="/server/program" method="post">
+            <input type="text" name="todo" placeholder="New Task" id="inputText" autocomplete="off">
+            <input type="button" name="add" value="Add" id="addButton">
+        </form>
+
+        <!-- to do list -->
+        <ul id="list">
+        </ul>
+    </section>
+
+    <!-- #list에 복제할 template -->
+    <template id="template">
+        <li>
+            <label class="label">
+                <input type="checkbox" name="done">
+                <span></span>
+            </label>
+            <div class="remove">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+        </li>
+    </template>
+
+</body>
+</html>
