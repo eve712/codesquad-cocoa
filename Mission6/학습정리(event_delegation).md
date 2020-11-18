@@ -118,3 +118,11 @@ article.dataset.indexNumber // "123"
     new Menu(menu);
 </script>
 ```
+
+<br>
+<br>
+
+---
+
+### 참고 출처
+<https://ko.javascript.info/event-delegation>
