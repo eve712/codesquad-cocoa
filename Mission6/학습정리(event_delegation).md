@@ -67,6 +67,8 @@ table.onclick = function(event) {
 3. 중첩 테이블이 있는 경우 `event.target`은 현재 테이블 바깥에 있는 `<td>`가 될 수도 있다. 이런 경우를 처리하기 위해 `<td>`가 `table`안에 있는지 확인한다.
 4. 진짜 td를 강조.
 
+<br>
+
 ```javascript
 element.closest(selector)
  // element의 조상 중 가장 가까운 selector 요소를 반환
@@ -89,6 +91,8 @@ article.dataset.columns // "3"
 article.dataset.indexNumber // "123"
 ```
 각 속성은 string이고 읽고 쓸 수 있다. `article.dataset.columns = 5`로 설정하면 해당 속성을 `"5"`로 변경할 수 있다.
+
+<br>
 
 ### ✱버튼 메뉴 구현
 '저장', '불러오기', '검색'등의 버튼 메뉴를 구현한다고 가정했을 때 **버튼과 메서드를 어떻게 연결**할 수 있을까. 가장 먼저 버튼 각각에 독립된 핸들러를 할당하는 방법이 생각날 것이다. 하지만 더 우아한 방법이 있다. 메뉴 전체에 핸들러를 하나 추가해주고, 각 버튼의 `data-action`속성에 호출할 메서드를 할당해주는 방법이다.
