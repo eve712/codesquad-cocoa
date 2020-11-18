@@ -64,10 +64,10 @@ class TodoView {
     makeLineThrough(target) {
         const checkbox = target.firstElementChild;
         if(!checkbox.checked) {
-            checkbox.nextElementSibling.style.textDecoration = "line-through";
+            checkbox.nextElementSibling.classList.add('taskText');
         }
         else {
-            checkbox.nextElementSibling.removeAttribute("style");
+            checkbox.nextElementSibling.classList.remove('taskText');
         }
         const elementId = target.parentElement.id;
         this.todoModel.updateChecked(elementId);
