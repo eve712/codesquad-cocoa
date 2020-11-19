@@ -32,11 +32,11 @@ class TodoModel {
     }
 }
 class TodoView {
-    constructor(reference) {
-        this.inputEl = reference.inputEl;
-        this.addButton = reference.addButton;
-        this.listWrapper = reference.listWrapper;
-        this.todoModel = reference.todoModel;
+    constructor({inputEl, addButton, listWrapper, todoModel}) {
+        this.inputEl = inputEl;
+        this.addButton = addButton;
+        this.listWrapper = listWrapper;
+        this.todoModel = todoModel;
     }
     initEvent(todoViewObj) {
         this.addButton.addEventListener("click", this.addList.bind(this));
@@ -45,7 +45,8 @@ class TodoView {
             if(target.nodeName === 'I') { todoViewObj.removeListItem(target); }
         });
     }
-    addList() {
+    addList(event) {
+        event.preventDefault();
         const task = this.inputEl.value;
         const modelObj = this.todoModel.addToArray(task);
         this.createListItem(modelObj);
@@ -62,13 +63,6 @@ class TodoView {
         this.listWrapper.appendChild(copy);
     }
     makeLineThrough(target) {
-        const checkbox = target.firstElementChild;
-        if(!checkbox.checked) {
-            checkbox.nextElementSibling.classList.add('taskText');
-        }
-        else {
-            checkbox.nextElementSibling.classList.remove('taskText');
-        }
         const elementId = target.parentElement.id;
         this.todoModel.updateChecked(elementId);
     }
