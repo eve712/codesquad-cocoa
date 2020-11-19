@@ -40,7 +40,8 @@
     padding: 0;
     border: none;
     border-radius: 4px;
-    background-color: rgb(48, 141, 184);
+    /* background-color: rgb(48, 141, 184); */
+    background-color: rgb(79, 139, 121);
     color: #fff;
     font-weight: 300;
     cursor: pointer;
@@ -56,40 +57,65 @@
     border-style: solid solid none solid;
     border-radius: 4px;
     box-sizing: border-box;
-    /* i요소 위치 배치 기준 */
+    /* i요소, edit버튼 위치 배치 기준 */
     position: relative;
 }
 #list > li:last-child {
     border-style: solid;
 }
 .label {
-    /* border: 1px solid red; */
     display: block;
     box-sizing: border-box;
-    width: 40rem;
+    width: 37rem;
     margin: 0.7rem 0;
     padding: 0.5rem 0.8rem;
     cursor: pointer;
 }
-#list > li > div {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    position: absolute;
-    top: 0.4rem;
-    right: 1.5rem;
-}
-#list > li > div > i {
-    font-size: 1.2rem;
-    color: rgb(216, 14, 14);
-    line-height: 3rem;
-    padding-left: 1rem;
-    cursor: pointer;
-}
+
+/* ----체크박스---- */
 .label > input {
     margin-left: 1rem;
     margin-right: 2.3rem;
 }
+
+/* ----task <span>요소---- */
+input:checked + span {
+    color: #757575;
+    text-decoration: line-through;
+}
 .taskText {
     text-decoration: line-through;
+}
+
+/* ----휴지통---- */
+#list > li > div {
+    width: 3rem;
+    height: 3rem;
+    /* border: 1px solid red; */
+    border-radius: 50%;
+    position: absolute;
+    top: 0.4rem;
+    right: 0.8rem;
+}
+#list > li > div > i {
+    font-size: 1.2rem;
+    color: #d80e0ed2;
+    line-height: 3rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+/* ----edit 버튼---- */
+.editButton {
+    position: absolute;
+    top: 1.1rem;
+    right: 4rem;
+
+    border: none;
+    border-radius: 3px;
+    width: 2.4rem;
+    height: 1.8rem;
+    background-color: rgb(149, 189, 169);
+    color: #333;
+    cursor: pointer;
 }
