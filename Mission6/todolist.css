@@ -83,10 +83,6 @@ input:checked + span {
     color: #757575;
     text-decoration: line-through;
 }
-.taskText {
-    text-decoration: line-through;
-}
-
 /* ----휴지통---- */
 #list > li > div {
     width: 3rem;
