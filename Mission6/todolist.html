@@ -19,11 +19,21 @@
 
         <form action="/server/program" method="post">
             <input type="text" name="todo" placeholder="New Task" id="inputText" autocomplete="off">
-            <input type="button" name="add" value="Add" id="addButton">
+            <input type="submit" name="add" value="Add" id="addButton">
         </form>
 
         <!-- to do list -->
         <ul id="list">
+            <li>
+                <label class="label">
+                    <input type="checkbox" name="done">
+                    <span>data1</span>
+                </label>
+                <button class="editButton">edit</button>
+                <div class="remove">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+            </li>
         </ul>
     </section>
 
@@ -34,6 +44,7 @@
                 <input type="checkbox" name="done">
                 <span></span>
             </label>
+            <button class="editButton">edit</button>
             <div class="remove">
                 <i class="fas fa-trash-alt"></i>
             </div>
