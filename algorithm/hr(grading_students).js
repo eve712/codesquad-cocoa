@@ -42,7 +42,7 @@ function gradingStudents(grades) {
     const result = grades.map(grade => {
         closestMultiple = getMinMultiple(grade);
         if(grade < 38) return grade;
-        if(closestMultiple - grade < 3) return closestMultiple;
+        else if(closestMultiple - grade < 3) return closestMultiple;
         else return grade;
     });
     return result;
