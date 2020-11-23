@@ -7,8 +7,9 @@
     <script defer src="smart_dropdown.js"></script>
     <style>
         #container {
-            padding: 4rem;
+            padding: 0 4rem;
             width: 14rem;
+            position: relative;
         }
         #titleOfList {
             border: 3px solid #aaa;
@@ -22,7 +23,7 @@
             box-sizing: border-box;
         }
         .hiddenList {
-            visibility: hidden;
+            display: none;
         }
         .shownList {
             padding: 0;
@@ -36,6 +37,14 @@
             margin: 0.5rem 0;
             text-align: center;
             color: #222;
+        }
+        #counting {
+            width: 100px;
+            padding: 6rem 0;
+            position: absolute;
+            top: 0;
+            left: 22rem;
+            color: #444;
         }
     </style>
 </head>
@@ -51,5 +60,6 @@
             <li>strawberry</li>
         </ul>
     </div>
+    <div id="counting"></div>
 </body>
 </html>
