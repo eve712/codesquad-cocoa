@@ -5,7 +5,7 @@ class ShowingList {
         this.titleOfList = titleOfList;
         this.container = container;
         this.fruitList = fruitList;
-        this.timerOfTitle = null;
+        this.timerOfTitle;
     }
     initEvent() {
         this.titleOfList.addEventListener('mouseenter', this.setTimer.bind(this));
@@ -20,11 +20,9 @@ class ShowingList {
         this.fruitList.classList.remove('shownList');
         this.fruitList.classList.add('hiddenList');        
     }
-    // 타이머 설정, 타이머ID 할당
     setTimer() {
         this.timerOfTitle = setTimeout(this.showList.bind(this), 1000);    
     }
-    // 타이머 해제
     clearTimer() {
         clearTimeout(this.timerOfTitle);    
     }
@@ -33,36 +31,43 @@ class ShowingList {
 
 //----●● 마우스 이동정보 출력 ●●--------------------
 class CountingList {
-    constructor({listItem}) {
+    constructor({listItem, wrapper}) {
         this.listItem = listItem;
-        this.timerOfList = null;
+        this.wrapper = wrapper;
+        this.timerOfPrinting;
     }
     initEvent() {
         this.listItem.forEach(el => el.addEventListener('mouseenter', this.setPrinter.bind(this)));
         this.listItem.forEach(el => el.addEventListener('mouseleave', this.clearPrinter.bind(this)));
     }
+
+    // listItem에 첫 mouseenter 이벤트가 발생할 때 counting해주는 새로운 요소 생성
     createPrintingEl(target) {
-        const box = document.getElementById('counting');
-        let el = document.createElement('div');
+        const el = document.createElement('div');
         el.id = target.innerText;
         el.innerText = `${target.innerText} : 1`;
-        box.appendChild(el);
+        this.wrapper.appendChild(el);
     }    
-    // 매개변수 el = div로 새로 만들어진 요소 (printedEl)
+
+    // 마우스가 머문만큼 500ms마다 카운팅
+    // 매개변수 el = div로 새로 만들어진 요소(printedEl)
     count(el) {
         let textArr = el.innerText.split(' : ');
         let count = textArr[1];
         el.innerText = `${el.id} : ${++count}`;
     }
-    // 매개변수 target = mouseenter 이벤트된 li 요소
+
+    // 카운팅하는 요소가 문서에 이미 있는지 확인하고, 있으면 setInterval로 계속 카운팅
+    // 매개변수 target = mouseenter 발생한 li 요소
     setPrinter({target}) {
         let printingEl = document.getElementById(target.innerText);
         if (!printingEl) this.createPrintingEl(target);
         let printedEl = document.getElementById(target.innerText);
-        this.timerOfList = setInterval(this.count.bind(null, printedEl), 500);    
+        this.timerOfPrinting = setInterval(this.count.bind(null, printedEl), 500);    
     }
+
     clearPrinter() {
-        clearInterval(this.timerOfList);
+        clearInterval(this.timerOfPrinting);
     }
 }
 
@@ -72,7 +77,8 @@ const reference = {
     titleOfList: document.getElementById('titleOfList'),
     container: document.getElementById('container'),
     fruitList: document.getElementById('fruitList'),
-    listItem:  document.querySelectorAll('#fruitList > li')
+    listItem:  document.querySelectorAll('#fruitList > li'),
+    wrapper: document.getElementById('counting')
 }
 
 let showingList = new ShowingList(reference);
