@@ -1,5 +1,6 @@
-const header = document.getElementById('titleOfList');
+const titleOfList = document.getElementById('titleOfList');
 const fruitList = document.getElementById('fruitList');
+const container = document.getElementById('container');
 let timerId;
 
 const showList = function() {
@@ -12,15 +13,15 @@ const hideList = function() {
     fruitList.classList.add('hiddenList');
 }
 
-// 타이머 설정, timerId값을 참조할 수 있게 리턴
+// 타이머 설정, 타이머ID 할당
 const setTimer = function() {
-    timerId = setTimeout(showList, 3000);
+    timerId = setTimeout(showList, 2000);
 }
-// 타이머 해제, 메뉴 숨기기
+// 타이머 해제
 const clearTimer = function() {
     clearTimeout(timerId);
-    if (fruitList.classList.contains('shownList')) hideList();
 }
 
-header.addEventListener('mouseenter', setTimer);
-header.addEventListener('mouseleave', clearTimer);
+titleOfList.addEventListener('mouseenter', setTimer);
+titleOfList.addEventListener('mouseleave', clearTimer);
+container.addEventListener('mouseleave', hideList);
