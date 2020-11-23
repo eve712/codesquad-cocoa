@@ -6,8 +6,10 @@
     <title>Asynchronous | smart dropdown menu</title>
     <script defer src="smart_dropdown.js"></script>
     <style>
-        body {
-            padding: 3rem;
+        #container {
+            border: 1px solid red;
+            padding: 4rem;
+            width: 14rem;
         }
         #titleOfList {
             border: 3px solid #aaa;
@@ -17,6 +19,7 @@
             text-align: center;
             font-size: 1.2em;
             font-weight: 400;
+            color: #333;
             box-sizing: border-box;
         }
         .hiddenList {
@@ -38,14 +41,16 @@
     </style>
 </head>
 <body>
-    <h1 id="titleOfList">리스트</h1>
-    <ul id="fruitList" class="hiddenList">
-        <li>grape</li>
-        <li>apple</li>
-        <li>orange</li>
-        <li>banana</li>
-        <li>kiwi</li>
-        <li>strawberry</li>
-    </ul>
+    <div id="container">
+        <h1 id="titleOfList">리스트</h1>
+        <ul id="fruitList" class="shownList">
+            <li>grape</li>
+            <li>apple</li>
+            <li>orange</li>
+            <li>banana</li>
+            <li>kiwi</li>
+            <li>strawberry</li>
+        </ul>
+    </div>
 </body>
 </html>
