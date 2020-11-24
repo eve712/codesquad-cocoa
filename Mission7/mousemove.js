@@ -36,10 +36,10 @@ class CountingList {
         this.timerOfPrinting;
     }
     initEvent() {
-        this.setEvent('mouseenter', this.createPrintingEl);
-        setInterval(this.setEvent.bind(this, 'mousemove', this.count, {once: true}), 500);
+        this.setListEvent('mouseenter', this.createPrintingEl);
+        setInterval(this.setListEvent.bind(this, 'mousemove', this.count, {once: true}), 500);
     }
-    setEvent(type, func, option = null) {
+    setListEvent(type, func, option = null) {
         this.listItem.forEach(el => el.addEventListener(type, func.bind(this), option));
     }
     // listItem에 첫 mouseenter 이벤트가 발생할 때 counting해주는 새로운 요소 생성
