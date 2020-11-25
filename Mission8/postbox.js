@@ -1,8 +1,9 @@
 
-//  마을의 개수
-//  마을의 개수만큼 CreatNode로 만듦.
+//  마을의 개수 정하기
 //  name > random()으로 52개 알파벳 중 하나 랜덤 지정.
+//   → 중복되면 다시 이름 정하기(재귀)
 //  postbox > random()으로 확률 지정해서 bool값 반환하도록.
+//  마을의 개수만큼 CreatNode로 만듦.
 
 //  child를 가질 마을 개수
 //  child를 가질 마을을 선택(idx), 마을의 개수(2)만큼 반복
@@ -22,6 +23,7 @@ class TownModel {
     constructor() {
         this.townRelation = [];
         this.indexes = [];
+        this.usedName = [];
         this.numOfTown;
         this.numOfHavingChild;
     }
@@ -30,11 +32,15 @@ class TownModel {
         const random = Math.floor(Math.random() * max) + min;
         return random;
     }
-    // 마을의 이름 랜덤으로 정하는 함수
+    // 마을의 이름 랜덤으로 정하는 함수, 중복이면 다시 정하기
     createName () {
         const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const name = alphabet.charAt(this.getRandomNum(0, alphabet.length - 1));
-        return name;
+        const idx = this.getRandomNum(0, alphabet.length - 1);
+        if(this.usedName.indexOf(idx) < 0) {
+            this.usedName.push(idx);
+            return alphabet.charAt(idx);
+        }
+        else this.createName();
     }
     // 30% postbox true
     createPostbox() {
@@ -45,8 +51,8 @@ class TownModel {
     // 마을을 새로운 노드로 만드는 함수
     createTown (n) {
         for(let i = 0; i < n; i++) {
-            const name = this.createName();
-            const postbox = this.createPostbox();
+            let name = this.createName();
+            let postbox = this.createPostbox();
             let newTown = new CreateNode(name, postbox);
             this.townRelation.push(newTown);
         }
