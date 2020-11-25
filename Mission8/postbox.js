@@ -17,6 +17,7 @@ const CreateNode = function (name, value) {
 class TownModel {
     constructor() {
         this.townRelation = [];
+        this.indexes = [];
         this.numOfFirst;
         this.numOfHavingChild;
     }
@@ -36,10 +37,28 @@ class TownModel {
         this.numOfFirst = this.getRandomNum(1, 5);
         this.numOfHavingChild = this.getRandomNum(0, 5);
     }
-    // chlid를 가질 마을 선택(idx)
-    selectIdx() {
-        let indexes = [];
+    // chlid를 가질 마을 선택(idx 정하기)
+    // n = this.numOfHavingChild 뽑아야할 idx 개수
+    // length = 현재 진행중인 배열의 원소 개수
+    // clear = 인덱스 모아둔 배열 초기화 여부
+    selectIdx(n, length, clear = true) {
+        if(clear) this.indexes = [];
+        let result = this.indexes;
+        for(let i = 0; i < n; i++) {
+            let idx = this.getRandomNum(0, length - 1);
+            if(result.length < n && result.indexOf(idx) < 0) {
+                result.push(idx);
+            }   
+        }
+        if(result.length === n) {
+            this.indexes = result;
+            return result;
+        }
+        else this.selectIdx(n - result.length, length, false);
     }
+
+
+
 }
 
 // 생성한 마을들을 DOM 요소로 구현
