@@ -122,6 +122,15 @@ class createTown {
 // 생성한 마을들을 DOM 요소로 구현
 class ViewTown {
 
+    createEl(arr, parentEl) {
+        for(let i = 0; i < arr.length; i++) {
+            let el = document.createElement('div');
+            el.innerText = arr[i].name;
+            parentEl.appendChild(el);
+            if(arr[i].postbox) el.classList.add('postbox');
+        }
+    }
+
 }
 
 //------------test--------------
