@@ -35,7 +35,6 @@ class TownData {
         return random;
     }
     // 마을의 이름 랜덤으로 정하는 함수, 중복이면 다시 정하기
-    // ●●● 최대 개수가 52개라는 한계 → 무한이 아님!!
     createName () {
         const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const idx1 = this.getRandomNum(0, alphabet.length - 1); // 다른 값
@@ -47,7 +46,7 @@ class TownData {
         }
         else this.createName();
     }
-    // 40% postbox true
+    // postbox 속성 true, false
     createPostbox() {
         let num = Math.random();
         if(num >= 0.6) return true;
@@ -65,8 +64,8 @@ class TownData {
         return arr;
     }
     // 마을의 개수, child를 가질 마을의 개수
-    decideNum(max) {
-        this.numOfTown = this.getRandomNum(1, max);
+    decideNum(min, max) {
+        this.numOfTown = this.getRandomNum(min, max);
         this.numOfHavingChild = this.getRandomNum(0, this.numOfTown);
     }
     // chlid를 가질 마을 선택(idx 정하기)
@@ -91,14 +90,14 @@ class TownData {
         }
     }
     // n개 이하로 마을 생성, 마을 노드가 들어있는 배열 반환
-    getTownsArr(n) {
-        this.decideNum(n); // n개 이하로 마을 개수 랜덤 돌리기
+    getTownsArr(min, max) {
+        this.decideNum(min, max); // n개 이하로 마을 개수 랜덤 돌리기
         this.selectIdx(this.numOfHavingChild, this.numOfTown); // 자식을 가질 idx 뽑아 this.indexes
         const newTownsArr = this.createTown(this.numOfTown); // 마을 개수만큼 노드 만들어 배열로 반환
         return newTownsArr;
     }
     pushFirstTown(n) {
-        const newTownArr = this.getTownsArr(n);
+        const newTownArr = this.getTownsArr(3, n);
         this.allTown = [...newTownArr];
     }
     // 부모 마을의 자식 형제는 n개 이하로..
@@ -106,7 +105,7 @@ class TownData {
         let newChildArr;
         if(this.indexes.length > 0) {
             this.indexes.forEach(idx => {
-                newChildArr = this.getTownsArr(n);
+                newChildArr = this.getTownsArr(1, n);
                 parentArr[idx].child.push(...newChildArr);
                 this.createChildTown(n, parentArr[idx].child);
             });
@@ -129,7 +128,6 @@ class ViewTown {
         this.btn = document.getElementById('postbtn');
         this.postboxEls = [];
     }
-
     // 배열을 div 요소로 만들어 parentEl 안에 추가
     createEl(arr, parentEl) {
         for(let i = 0; i < arr.length; i++) {
@@ -140,11 +138,12 @@ class ViewTown {
             if(arr[i].postbox) {
                 el.classList.add('postbox');
                 this.postboxEls.push(el);
+
             }
         }
         return parentEl.children; // 생성한 자식요소들을 배열로 반환
     }
-    //
+    // allTown배열을 재귀로 돌면서 모든 객체를 요소로 만들기
     createAllEl(arr, parentEl) {
         let townElArr = this.createEl(arr, parentEl);
         for(let i = 0; i < arr.length; i++) {
@@ -169,7 +168,7 @@ class ViewTown {
 
 //------------test--------------
 let townData = new TownData();
-townData.main(6,2);
+townData.main(6,3);
 
 let viewTown = new ViewTown(townData);
 viewTown.main();
