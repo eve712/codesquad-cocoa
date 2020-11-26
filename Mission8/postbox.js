@@ -38,10 +38,12 @@ class createTown {
     // ●●● 최대 개수가 52개라는 한계 → 무한이 아님!!
     createName () {
         const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        const idx = this.getRandomNum(0, alphabet.length - 1);
-        if(this.usedName.indexOf(idx) < 0) {
-            this.usedName.push(idx);
-            return alphabet.charAt(idx);
+        const idx1 = this.getRandomNum(0, alphabet.length - 1); // 다른 값
+        const idx2 = this.getRandomNum(0, alphabet.length - 1); // 다른 값 할당
+        const name = alphabet.charAt(idx1) + alphabet.charAt(idx2);
+        if(this.usedName.indexOf(name) < 0) {
+            this.usedName.push(name);
+            return name;
         }
         else this.createName();
     }
