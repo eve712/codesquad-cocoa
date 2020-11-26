@@ -125,7 +125,8 @@ class ViewTown {
     constructor(townData) {
         this.townData = townData; 
         this.map = document.getElementById('map'); // 지도가 나타날 공간
-        this.btn = document.getElementById('postbtn');
+        this.btn = document.getElementById('postbtn'); // 버튼
+        this.infoBox = document.getElementById('answer'); // 정보 공간
         this.postboxEls = [];
     }
     // 배열을 div 요소로 만들어 parentEl 안에 추가
@@ -157,18 +158,34 @@ class ViewTown {
         this.btn.addEventListener('click', this.showPostbox.bind(this));
     }
     showPostbox() {
-        this.postboxEls
         if(this.postboxEls[0].classList.contains('red')) {
             this.postboxEls.forEach(el => el.classList.remove('red'));
         } else {
             this.postboxEls.forEach(el => el.classList.add('red'));
+            this.printInfo();
         }
+    } 
+    getTextArr() {
+        const textArr = this.postboxEls.map(el => {
+            let name = el.textContent;
+            if(name.length > 2) return name.charAt(0) + name.charAt(1);
+            else return name;
+        });
+        return textArr;
+    }
+    printInfo() {
+        const length = this.postboxEls.length;
+        const textArr = this.getTextArr();
+        let el = document.createElement('div');
+        const text = textArr.join(', ');
+        el.innerText = ` ${text} 총 ${length}개의 마을입니다.`;
+        this.infoBox.appendChild(el);
     }
 }
 
 //------------test--------------
 let townData = new TownData();
-townData.main(6,3);
+townData.main(5,2);
 
 let viewTown = new ViewTown(townData);
 viewTown.main();
