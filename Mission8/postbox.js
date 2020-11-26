@@ -160,6 +160,7 @@ class ViewTown {
     showPostbox() {
         if(this.postboxEls[0].classList.contains('red')) {
             this.postboxEls.forEach(el => el.classList.remove('red'));
+            this.infoBox.innerHTML = '';
         } else {
             this.postboxEls.forEach(el => el.classList.add('red'));
             this.printInfo();
