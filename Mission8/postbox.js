@@ -21,7 +21,7 @@ const CreateNode = function (name, value) {
 // ----------------------------------------
 
 // 마을을 생성하고, 마을에 대한 정보를 데이터로 보관
-class createTown {
+class TownData {
     constructor() {
         this.allTown = [];
         this.indexes = [];
@@ -119,20 +119,44 @@ class createTown {
     }
 }
 
+//----------------------------------------------------
+
 // 생성한 마을들을 DOM 요소로 구현
 class ViewTown {
+    constructor(townData) {
+        this.townData = townData; 
+        this.map = document.getElementById('map'); // 지도가 나타날 공간
+    }
 
+    // 배열을 div 요소로 만들어 parentEl 안에 추가
     createEl(arr, parentEl) {
         for(let i = 0; i < arr.length; i++) {
             let el = document.createElement('div');
             el.innerText = arr[i].name;
+            el.classList.add('town');
             parentEl.appendChild(el);
             if(arr[i].postbox) el.classList.add('postbox');
         }
+        return parentEl.children; // 생성한 자식요소들을 배열로 반환
+    }
+    //
+    createAllEl(arr, parentEl) {
+        let townElArr = this.createEl(arr, parentEl);
+        for(let i = 0; i < arr.length; i++) {
+            if(arr[i].child.length > 0) {
+                this.createAllEl(arr[i].child, townElArr[i]);
+            }
+        }
+    }
+    main() {
+        this.createAllEl(this.townData.allTown, this.map);
     }
 
-}
+} // class
 
 //------------test--------------
-let town = new createTown();
-town.main(6,2);
+let townData = new TownData();
+townData.main(6,2);
+
+let viewTown = new ViewTown(townData);
+viewTown.main();
