@@ -3,11 +3,11 @@
 //  name > random()으로 52개 알파벳 중 하나 랜덤 지정.
 //   → 중복되면 다시 이름 정하기(재귀)
 //  postbox > random()으로 확률 지정해서 bool값 반환하도록.
-//  마을의 개수만큼 CreatNode로 만들고 townRelation 배열에 넣기
+//  마을의 개수만큼 CreatNode로 만들고 allTown 배열에 넣기
 
 //  child를 가질 마을 개수
-//  child를 가질 마을을 선택(idx), 마을의 개수(2)만큼 반복
-//  townRelation[idx]의 child에 새로운 노드를 생성해서 push
+//  child를 가질 마을을 선택(idx), 마을의 개수만큼 반복
+//  allTown[idx]의 child에 새로운 노드를 생성해서 push
 
 // ----------------------------------------
 
@@ -18,8 +18,10 @@ const CreateNode = function (name, value) {
     this.child = [];
 }
 
+// ----------------------------------------
+
 // 마을을 생성하고, 마을에 대한 정보를 데이터로 보관
-class TownModel {
+class createTown {
     constructor() {
         this.allTown = [];
         this.indexes = [];
@@ -33,8 +35,9 @@ class TownModel {
         return random;
     }
     // 마을의 이름 랜덤으로 정하는 함수, 중복이면 다시 정하기
+    // ●●● 최대 개수가 52개라는 한계 → 무한이 아님!!
     createName () {
-        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const idx = this.getRandomNum(0, alphabet.length - 1);
         if(this.usedName.indexOf(idx) < 0) {
             this.usedName.push(idx);
@@ -50,12 +53,14 @@ class TownModel {
     }
     // 마을을 새로운 노드로 만드는 함수
     createTown (n) {
+        let arr = [];
         for(let i = 0; i < n; i++) {
             let name = this.createName();
             let postbox = this.createPostbox();
             let newTown = new CreateNode(name, postbox);
-            this.allTown.push(newTown);
+            arr.push(newTown);
         }
+        return arr;
     }
     // 마을의 개수, child를 가질 마을의 개수
     decideNum(max) {
@@ -83,21 +88,40 @@ class TownModel {
             this.selectIdx(n, length, false);
         }
     }
-    main() {
-        this.decideNum(8); // 5개 이하로 마을 개수 랜덤 돌리기
-        this.createTown(this.numOfTown); // 나온 수만큼 노드 만들어 배열에 넣음
+    // n개 이하로 마을 생성, 마을 노드가 들어있는 배열 반환
+    getTownsArr(n) {
+        this.decideNum(n); // n개 이하로 마을 개수 랜덤 돌리기
+        this.selectIdx(this.numOfHavingChild, this.numOfTown); // 자식을 가질 idx 뽑아 this.indexes
+        const newTownsArr = this.createTown(this.numOfTown); // 마을 개수만큼 노드 만들어 배열로 반환
+        return newTownsArr;
+    }
+    pushFirstTown(n) {
+        const newTownArr = this.getTownsArr(n);
+        this.allTown = [...newTownArr];
+    }
+    // 부모 마을의 자식 형제는 n개 이하로..
+    createChildTown(n, parentArr) {
+        let newChildArr;
+        if(this.indexes.length > 0) {
+            this.indexes.forEach(idx => {
+                newChildArr = this.getTownsArr(n);
+                parentArr[idx].child.push(...newChildArr);
+                this.createChildTown(n, parentArr[idx].child);
+            });
+        }
+    }
+    main(firstTown, childTown) {
+        this.pushFirstTown(firstTown); // 1차 마을 allTown배열에 push
+        this.createChildTown(childTown, this.allTown); // 자식마을 2개 이하
         console.log(this.allTown);
-        console.log(this.numOfHavingChild);
-        this.selectIdx(this.numOfHavingChild, this.numOfTown);
-        console.log(this.indexes);
     }
 }
 
 // 생성한 마을들을 DOM 요소로 구현
-class TownView {
+class ViewTown {
 
 }
 
 //------------test--------------
-let town = new TownModel();
-town.main();
+let town = new createTown();
+town.main(6,2);
