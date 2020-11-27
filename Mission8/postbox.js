@@ -182,11 +182,6 @@ class ViewTown {
         this.createAllEl(this.townData.allTown, this.map);
         this.btn.addEventListener('click', this.showPostbox.bind(this));
     }
-    // 총 자식 수를 구해서 크기의 최소값 정하기
-    func(parentEl) {
-        const townArr = parentEl.children; // 1차 마을 요소 배열
-        const childLength = [...townArr].map(el => this.getChildLength(el)); // 1차마을 자손 개수 배열
-    }
     // el의 자손요소 개수 반환
     getChildLength(el) {
         let num = el.children.length;
@@ -194,6 +189,17 @@ class ViewTown {
            num += [...el.children].reduce((acc, curr) => acc + this.getChildLength(curr), 0);
         }
         return num;
+    }
+    // parentEl의 자식 요소들의 총 자손 수 배열 반환
+    getChildLengthArr(parentEl) {
+        const townArr = parentEl.children; // 1차 마을 요소 배열 
+        const childLength = [...townArr].map(el => this.getChildLength(el)); // 1차마을 자손 개수 배열
+        return childLength;
+    }
+    getMinWidthArr(num) {
+        const childLengthArr = this.getChildLengthArr(this.map);
+        minWidthArr = childLengthArr.map(v => v * num);
+        return minWidthArr;
     }
 }
 
