@@ -29,7 +29,8 @@ class TownData {
         this.numOfTown;
         this.numOfHavingChild;
     }
-    // min ~ max까지 랜덤으로 정수 반환
+    // 랜덤으로 정수 반환
+    // min ~ (max + min - 1)까지
     getRandomNum (min, max) {
         const random = Math.floor(Math.random() * max) + min;
         return random;
@@ -97,13 +98,13 @@ class TownData {
         return newTownsArr;
     }
     pushFirstTown(n) {
-        const newTownArr = this.getTownsArr(3, n);
+        const newTownArr = this.getTownsArr(2, n);
         this.allTown = [...newTownArr];
     }
     // 부모 마을의 자식 형제는 n개 이하로..
     createChildTown(n, parentArr) {
         let newChildArr;
-        if(this.indexes.length > 0) {
+        if(this.indexes.length > 0) { 
             this.indexes.forEach(idx => {
                 newChildArr = this.getTownsArr(1, n);
                 parentArr[idx].child.push(...newChildArr);
@@ -126,7 +127,7 @@ class ViewTown {
         this.townData = townData; 
         this.map = document.getElementById('map'); // 지도가 나타날 공간
         this.btn = document.getElementById('postbtn'); // 버튼
-        this.infoBox = document.getElementById('answer'); // 정보 공간
+        this.infoBox = document.getElementById('answer'); // 정보 출력 공간
         this.postboxEls = [];
     }
     // 배열을 div 요소로 만들어 parentEl 안에 추가
@@ -138,13 +139,12 @@ class ViewTown {
             parentEl.appendChild(el);
             if(arr[i].postbox) {
                 el.classList.add('postbox');
-                this.postboxEls.push(el);
-
+                this.postboxEls.push(el);      
             }
         }
         return parentEl.children; // 생성한 자식요소들을 배열로 반환
     }
-    // allTown배열을 재귀로 돌면서 모든 객체를 요소로 만들기
+    // 재귀로 돌면서 모든 객체를 요소로 만들기
     createAllEl(arr, parentEl) {
         let townElArr = this.createEl(arr, parentEl);
         for(let i = 0; i < arr.length; i++) {
@@ -152,10 +152,6 @@ class ViewTown {
                 this.createAllEl(arr[i].child, townElArr[i]);
             }
         }
-    }
-    main() {
-        this.createAllEl(this.townData.allTown, this.map);
-        this.btn.addEventListener('click', this.showPostbox.bind(this));
     }
     showPostbox() {
         if(this.postboxEls[0].classList.contains('red')) {
@@ -182,11 +178,29 @@ class ViewTown {
         el.innerText = ` ${text} 총 ${length}개의 마을입니다.`;
         this.infoBox.appendChild(el);
     }
+    main() {
+        this.createAllEl(this.townData.allTown, this.map);
+        this.btn.addEventListener('click', this.showPostbox.bind(this));
+    }
+    // 총 자식 수를 구해서 크기의 최소값 정하기
+    func(parentEl) {
+        const townArr = parentEl.children; // 1차 마을 요소 배열
+        const childLength = [...townArr].map(el => this.getChildLength(el)); // 1차마을 자손 개수 배열
+    }
+    // el의 자손요소 개수 반환
+    getChildLength(el) {
+        let num = el.children.length;
+        if (num > 0)  {
+           num += [...el.children].reduce((acc, curr) => acc + this.getChildLength(curr), 0);
+        }
+        return num;
+    }
 }
 
 //------------test--------------
 let townData = new TownData();
-townData.main(5,2);
+townData.main(5, 2);
 
 let viewTown = new ViewTown(townData);
 viewTown.main();
+viewTown.func(viewTown.map);
