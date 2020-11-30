@@ -52,6 +52,7 @@ body {
     width: 110px;
     height: 85px;
     object-fit: contain;
+    cursor: pointer;
 }
 .menu_name,
 .menu_price {
@@ -227,4 +228,30 @@ body {
     color: #333;
     text-align: center;
     line-height: 60px;
+}
+.sticker {
+    position: absolute;
+    width: 48px;
+    height: 23px;
+    border-radius: 10px;
+    background-color: rgb(255, 230, 86);
+
+    font-size: 0.9em;
+    font-weight: 600;
+    color: red;
+    text-align: center;
+    line-height: 25px;
+    transform: rotate(-8deg);
+}
+#best1 {
+    top: 134px;
+    left: 230px;
+}
+#best2 {
+    top: 427px;
+    left: 78px;
+}
+#new {
+    top: 583px;
+    left: 555px;
 }
