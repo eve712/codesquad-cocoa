@@ -34,7 +34,7 @@ body {
     box-sizing: border-box;
     width: 645px;
     height: 590px;
-    padding: 20px;
+    padding: 0 20px;
     border-radius: 29px;
     margin-right: 25px;
     background-color: seashell;
@@ -46,20 +46,28 @@ body {
     box-sizing: border-box;
     padding: 10px;
     width: 130px;
-    height: 120px;
+    height: 140px;
 }
 .menu_img {
     width: 110px;
-    height: 100px;
+    height: 85px;
     object-fit: contain;
 }
-.menu_name {
-    height: 20px;
+.menu_name,
+.menu_price {
+    height: 19px;
     border-radius: 5px;
-    background-color: rgb(252, 206, 206);
+    background-color: rgb(255, 215, 215);
+    font-size: 0.9em;
     color: #222;
     text-align: center;
     line-height: 24px;
+}
+.menu_price {
+    margin-top: 3px;
+    background-color: rgb(255, 188, 188);
+    font-weight: 600;
+    color: #111;
 }
 
 /* ---------------사용자--------------- */
