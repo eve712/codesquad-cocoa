@@ -1,4 +1,5 @@
-// ------------● Menu Data ●--------------
+
+// -----------------------● Menu Data ●-----------------------
 // 메뉴데이터 생성자
 const DataTemplate = function(el, idx, obj) {
     this.number = idx + 1;
@@ -24,7 +25,8 @@ class MenuData {
     }
 }
 
-// ------------● Wallet Data ●--------------
+
+// -----------------------● Wallet Data ●-----------------------
 // 사이트가 로드될 때 지갑의 초기값을 설정해주는 클래스. (이후 변동은 view클래스에서 적용)
 class WalletData {
     constructor() {
@@ -66,10 +68,14 @@ class WalletData {
     }
 }
 
+
 // ------DOM 참조------
 const reference = {
-    menu: document.getElementsByClassName('menu')
+    menu: document.getElementsByClassName('menu'),
+    moneyWrap: document.getElementsByClassName('money_wrap'),
+    walletTotal: document.getElementById('total')
 }
+
 
 // ------ test ------
 const menuData = new MenuData(reference);
