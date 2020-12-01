@@ -30,11 +30,6 @@ class MenuData {
 // 사이트가 로드될 때 지갑의 초기값을 설정해주는 클래스. (이후 변동은 view클래스에서 적용)
 class WalletData {
     constructor() {
-        this.coin100;
-        this.coin500;
-        this.paper1000;
-        this.paper5000;
-        this.paper10000;
         this.moneyNumArr = [];
         this.total;
     }
@@ -42,17 +37,15 @@ class WalletData {
         const random = Math.floor(Math.random() * (max - min + 1)) + min;
         return random;
     }
-    // 동전, 지폐 개수 랜덤 뽑기
-    assignNum (min1, max1, min2, max2) {
-        this.coin100 = this.getRandomNum(min1, max1);
-        this.paper1000 = this.getRandomNum(min1, max1);
-        this.coin500 = this.getRandomNum(min2, max2);
-        this.paper5000 = this.getRandomNum(min2, max2);
-        this.paper10000 = this.getRandomNum(min2, max2);
-    }
-    // 동전, 지폐 개수 배열
-    assignNumArr() {
-        this.moneyNumArr = [this.coin100, this.coin500, this.paper1000, this.paper5000, this.paper10000];
+    // 동전, 지폐 개수 랜덤 뽑아 배열에 저장
+    assignNumArr(min1, max1, min2, max2) {
+        this.moneyNumArr = [
+            this.getRandomNum(min1, max1), // 100
+            this.getRandomNum(min2, max2), // 500
+            this.getRandomNum(min1, max1), // 1000
+            this.getRandomNum(min2, max2), // 5000
+            this.getRandomNum(min2, max2), // 1000
+        ];
     }
     // 총 금액의 합 구하는 함수
     sumAmount() {
@@ -62,8 +55,7 @@ class WalletData {
     }
     // 개수, 배열, 총합 구하는 함수
     initMoneyNum(min1, max1, min2, max2) {
-        this.assignNum(min1, max1, min2, max2);
-        this.assignNumArr();
+        this.assignNumArr(min1, max1, min2, max2);
         this.sumAmount();
     }
 }
