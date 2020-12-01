@@ -6,7 +6,7 @@
     <title>Web Vending Machine</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="vending_machine.css">
-    <script src="vending_machine.js"></script>
+    <script defer src="vending_machine.js"></script>
 </head>
 <body>
     <h1 id="header">🍙 Vending Machine 🍳</h1>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="menu">
                     <img src="https://i.postimg.cc/hGGrv3zb/pancake.png" alt="pancake" class="menu_img">
-                    <div class="menu_name">7.Pancake</div>
+                    <div class="menu_name">7. Pancake</div>
                     <div class="menu_price">7500</div>
                 </div>
                 <div class="menu">
@@ -75,7 +75,7 @@
                 </div>
                 <div class="menu">
                     <img src="https://i.postimg.cc/fRyt94CL/coffee.png" alt="coffee" class="menu_img">
-                    <div class="menu_name">13. Coffee</div>
+                    <div class="menu_name">13. Hot Choco</div>
                     <div class="menu_price">4200</div>
                 </div>
                 <div class="menu">
@@ -120,8 +120,6 @@
         </div> <!-- vending machine -->
         <div id="process">
             <span>500원 투입!</span> <br>
-            <!-- <span>100원 투입!</span> <br> -->
-            <!-- <span>1000원 투입!</span> <br> -->
         </div>
         <div id="wallet">
             <h2>Wallet💰</h2>
@@ -145,7 +143,7 @@
                 <button type="button" class="money_btn">10000원</button>
                 <div class="money_num"></div>
             </div>
-            <div id="total">32500</div>
+            <div id="total"></div>
         </div>
     </div> <!-- container -->
     <div id="best1" class="sticker">BEST!</div>
