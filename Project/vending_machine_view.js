@@ -51,12 +51,12 @@ class ViewMachine {
     }
     // 구매가능한 메뉴에 클래스 추가
     viewPossibleMenu() {
-        const objArr = this.menuData.filter(el => el.price < this.coinsWindow);
+        const objArr = this.menuData.filter(el => el.price <= this.coinsWindow);
         const idxArr = objArr.map(el => el.number - 1);
         console.log(idxArr);
         idxArr.forEach(idx => {
-            this.menuArr[idx].firstElementChild.nextElementSibling.classList.add('possible');
-            this.menuArr[idx].lastElementChild.classList.add('possible');
+            this.menuArr[idx].firstElementChild.nextElementSibling.classList.add('possible_name');
+            this.menuArr[idx].lastElementChild.classList.add('possible_price');
         });
     }
 }

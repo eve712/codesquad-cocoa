@@ -6,7 +6,7 @@ body {
     border-radius: 25px;
     width: 25rem;
     height: 4rem;
-    margin: 1.2rem 0 1.2rem 20rem;
+    margin: 1.4rem 0 0.7rem 20rem;
 
     font-family: "Bungee Inline", cursive;
     font-size: 1.8em;
@@ -70,9 +70,13 @@ body {
     font-weight: 600;
     color: #111;
 }
-.possible {
-    /* background-color: #7b4da7; */
-    background-color: #4c8045;
+.possible_name {
+    background-color: #79ad72;
+    color: seashell;
+    font-weight: 600;
+}
+.possible_price {
+    background-color: #55854e;
     color: seashell;
     font-weight: 600;
 }
@@ -217,11 +221,18 @@ body {
     color: #333;
 }
 .money_btn {
+    font-size: 1em;
     cursor: pointer;
     outline-style: none;
 }
+.money_btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px -8px,
+        rgba(0, 0, 0, 0.024) 0px -6px 16px -6px;
+}
 .money_num {
-    line-height: 40px;
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 45px;
     text-align: center;
 }
 #total {
@@ -233,8 +244,10 @@ body {
     font-size: 2em;
     color: #333;
     text-align: center;
-    line-height: 60px;
+    line-height: 65px;
 }
+
+/* --------------- 기타 --------------- */
 .sticker {
     position: absolute;
     width: 48px;
@@ -250,14 +263,28 @@ body {
     transform: rotate(-8deg);
 }
 #best1 {
-    top: 134px;
+    top: 130px;
     left: 230px;
 }
 #best2 {
-    top: 427px;
+    top: 423px;
     left: 78px;
 }
 #new {
-    top: 583px;
+    top: 575px;
     left: 555px;
+}
+.column {
+    width: 20px;
+    height: 15px;
+    background-color: #444;
+    position: absolute;
+}
+#left {
+    top: 85px;
+    left: 370px;
+}
+#right {
+    top: 85px;
+    left: 650px;
 }
