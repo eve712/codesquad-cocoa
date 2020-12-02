@@ -119,6 +119,7 @@ class ViewOfButton {
         this.numWindowEl = reference.numWindow;
         this.alertNumEl = reference.alertNum; // 모달창
         this.alertMoneyEl = reference.alertMoney; // 모달창
+        this.processEl = reference.process;
         this.menuData = menuDataArr; // 매뉴데이터 - 배열
         this.price;
         this.money;
@@ -146,6 +147,7 @@ class ViewOfButton {
         const isLarger = this.isLarger();
         if(!isLarger) this.alertMoneyEl.classList.remove('hidden');
         else {
+            this.viewProcess();
             this.coinsWindowEl.innerText = this.money - this.price;
             this.numWindowEl.innerText = '';
         }
@@ -156,6 +158,12 @@ class ViewOfButton {
         this.price = this.menuData[idx].price;
         this.money = this.coinsWindowEl.innerText;
         return this.money > this.price;
+    }
+    // process창에 과정 출력
+    viewProcess() {
+        const number = this.numWindowEl.innerText;
+        const name = this.menuData[number - 1].name;
+        this.processEl.innerHTML += `<span> ${number}번 ${name} 구매 완료!</span> <br>`;
     }
     // 모달창이 떴을 때 닫기 버튼 이벤트 핸들러
     closeAlert({target}) {
