@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Vending Machine</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="vending_machine.css">
-    <script defer src="vending_data.js"></script>
-    <script defer src="vending_view.js"></script>
+    <script defer src="vending_machine_data.js"></script>
+    <script defer src="vending_machine_view.js"></script>
 </head>
 <body>
     <h1 id="header">🍙 Vending Machine 🍳</h1>
@@ -97,12 +99,12 @@
             </div> <!-----board----->
 
             <div id="user">
-                <div id="coins_window">2400</div>
+                <div id="coins_window"></div>
                 <div id="btn_box">
                     <button type="button">반환</button>
                     <button type="button">선택</button>
                 </div>
-                <div id="num_window">12</div>
+                <div id="num_window"></div>
                 <div id="num_pad">
                     <button type="button" class="number">1</button>
                     <button type="button" class="number">2</button>
@@ -119,9 +121,7 @@
             </div> <!-- user -->
 
         </div> <!-- vending machine -->
-        <div id="process">
-            <span>500원 투입!</span> <br>
-        </div>
+        <div id="process"></div>
         <div id="wallet">
             <h2>Wallet💰</h2>
             <div class="money_wrap">
@@ -150,5 +150,7 @@
     <div id="best1" class="sticker">BEST!</div>
     <div id="best2" class="sticker">BEST!</div>
     <div id="new" class="sticker">NEW!</div>
+    <div id="left" class="column"></div>
+    <div id="right" class="column"></div>
 </body>
 </html>
