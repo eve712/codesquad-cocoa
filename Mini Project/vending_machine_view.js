@@ -9,7 +9,6 @@ class ViewOfWallet {
         this.coinsWindowEl = reference.coinsWindow;
         this.menuData = menuDataArr; // 매뉴데이터 - 배열
         this.walletData = walletData; // 지갑데이터 - 객체
-        this.coinsWindow = 0;
     }
     // wallet 클릭 이벤트
     setWalletEvent() {
@@ -26,7 +25,7 @@ class ViewOfWallet {
             this.fixWallet(idx);
             this.viewProcess(text);
             this.viewCoinsWindow(amount);
-            this.viewPossibleMenu();
+            this.viewPossibleMenu(this.walletData.coinsWindow);
         };
     }
     // this.wallet 값을 변경 (moneyNumArr 현금 개수, total 합계)
@@ -47,17 +46,22 @@ class ViewOfWallet {
     }
     // coins window창에 투입 금액 출력
     viewCoinsWindow(amount) {
-        const num = parseInt(amount);
-        this.coinsWindow += num;
-        this.coinsWindowEl.innerText = this.coinsWindow;
+        this.walletData.addCoinsWindow(parseInt(amount));
+        this.coinsWindowEl.innerText = this.walletData.coinsWindow;
     }
     // 구매가능한 메뉴에 클래스 추가
-    viewPossibleMenu() {
-        const objArr = this.menuData.filter(el => el.price <= this.coinsWindow);
+    viewPossibleMenu(money) {
+        const objArr = this.menuData.filter(el => el.price <= money);
         const idxArr = objArr.map(el => el.number - 1);
         idxArr.forEach(idx => {
             this.menuArr[idx].firstElementChild.nextElementSibling.classList.add('possible_name');
             this.menuArr[idx].lastElementChild.classList.add('possible_price');
+        });
+    }
+    removePossible() {
+        this.menuArr.forEach(el => {
+            el.firstElementChild.nextElementSibling.classList.remove('possible_name');
+            el.lastElementChild.classList.remove('possible_price');
         });
     }
 }
@@ -111,8 +115,8 @@ class ViewOfNumber {
 }
 
 // -----------------------● 선택 버튼 클릭했을 때 View 클래스 ●-----------------------
-class ViewOfButton {
-    constructor(reference, {menuDataArr}) {
+class ViewOfSelectBtn {
+    constructor(reference, {menuDataArr}, walletData, viewOfWallet) {
         this.selectBtn = reference.buttonBox.lastElementChild;
         this.closeBtns = reference.closeBtns;
         this.coinsWindowEl = reference.coinsWindow;
@@ -121,13 +125,15 @@ class ViewOfButton {
         this.alertMoneyEl = reference.alertMoney; // 모달창
         this.processEl = reference.process;
         this.menuData = menuDataArr; // 매뉴데이터 - 배열
+        this.walletData = walletData; // 지갑데이터 - 객체
         this.price;
         this.money;
+        this.viewOfWallet = viewOfWallet;
     }
     // 선택 버튼 클릭 이벤트
     setSelectEvent() {
         this.selectBtn.addEventListener('click', this.checkNumber.bind(this));
-        this.closeBtns.forEach( el => el.addEventListener('click', this.closeAlert.bind(this)));
+        this.closeBtns.forEach(el => el.addEventListener('click', this.closeAlert.bind(this)));
     }
     // 입력한 메뉴 번호 확인
     checkNumber() {
@@ -142,14 +148,14 @@ class ViewOfButton {
         const result = number > 0 && number <= numOfMenu;
         return result;
     }
-    // 투입된 금액, 가격 확인
+    // 투입된 금액, 가격 확인하고, 금액 차감
     checkMoney() {
         const isLarger = this.isLarger();
         if(!isLarger) this.alertMoneyEl.classList.remove('hidden');
         else {
             this.viewProcess();
-            this.coinsWindowEl.innerText = this.money - this.price;
-            this.numWindowEl.innerText = '';
+            this.viewChange();
+            this.updatePossible(this.walletData.coinsWindow);
         }
     }
     // 투입된 돈이 가격보다 큰지(살 수 있는지) 여부 확인
@@ -164,6 +170,17 @@ class ViewOfButton {
         const number = this.numWindowEl.innerText;
         const name = this.menuData[number - 1].name;
         this.processEl.innerHTML += `<span> ${number}번 ${name} 구매 완료!</span> <br>`;
+    }
+    // 금액 차감, 잔돈 출력
+    viewChange() {
+        const change = this.money - this.price;
+        this.walletData.setCoinsWindow(change);
+        this.coinsWindowEl.innerText = change;
+        this.numWindowEl.innerText = '';
+    }
+    updatePossible(change) {
+        this.viewOfWallet.removePossible();
+        this.viewOfWallet.viewPossibleMenu(change);
     }
     // 모달창이 떴을 때 닫기 버튼 이벤트 핸들러
     closeAlert({target}) {
@@ -188,5 +205,5 @@ viewOfNumber.setBoardEvent();
 viewOfNumber.setNumBtnEvent();
 viewOfNumber.setDelBtnEvent();
 
-const viewOfButton = new ViewOfButton(reference, menuData);
-viewOfButton.setSelectEvent();
+const viewOfSelectBtn = new ViewOfSelectBtn(reference, menuData, walletData, viewOfWallet);
+viewOfSelectBtn.setSelectEvent();
