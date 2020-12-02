@@ -110,27 +110,29 @@ class ViewOfNumber {
     }
 }
 
-// -----------------------● 반환, 선택 버튼 클릭했을 때 View 클래스 ●-----------------------
+// -----------------------● 선택 버튼 클릭했을 때 View 클래스 ●-----------------------
 class ViewOfButton {
-    constructor(reference, walletData, {menuDataArr}) {
-        this.returnBtn = reference.buttonBox.firstElementChild;
+    constructor(reference, {menuDataArr}) {
         this.selectBtn = reference.buttonBox.lastElementChild;
+        this.closeBtns = reference.closeBtns;
+        this.coinsWindowEl = reference.coinsWindow;
         this.numWindowEl = reference.numWindow;
-        this.alertNum = reference.alertNum;
-        this.closeBtn = reference.alertNum.firstElementChild.lastElementChild;
+        this.alertNumEl = reference.alertNum; // 모달창
+        this.alertMoneyEl = reference.alertMoney; // 모달창
         this.menuData = menuDataArr; // 매뉴데이터 - 배열
-        this.walletData = walletData; // 지갑데이터 - 객체
+        this.price;
+        this.money;
     }
     // 선택 버튼 클릭 이벤트
     setSelectEvent() {
         this.selectBtn.addEventListener('click', this.checkNumber.bind(this));
-        this.closeBtn.addEventListener('click', this.closeAlert.bind(this));
+        this.closeBtns.forEach( el => el.addEventListener('click', this.closeAlert.bind(this)));
     }
+    // 입력한 메뉴 번호 확인
     checkNumber() {
-        if(!this.isExisting) this.alertNum.classList.remove('hidden');
-        else {
-
-        }
+        const isExisting = this.isExisting()
+        if(!isExisting) this.alertNumEl.classList.remove('hidden');
+        else this.checkMoney();
     }
     // 입력한 번호의 메뉴가 존재하는지 확인
     isExisting() {
@@ -139,14 +141,30 @@ class ViewOfButton {
         const result = number > 0 && number <= numOfMenu;
         return result;
     }
-    closeAlert() {
-        this.alertNum.classList.add('hidden');
-        this.numWindowEl.innerText = '';
+    // 투입된 금액, 가격 확인
+    checkMoney() {
+        const isLarger = this.isLarger();
+        if(!isLarger) this.alertMoneyEl.classList.remove('hidden');
+        else {
+            this.coinsWindowEl.innerText = this.money - this.price;
+            this.numWindowEl.innerText = '';
+        }
     }
-
-    // 반환 버튼 클릭 이벤트
-    setReturnEvent() {
-        
+    // 투입된 돈이 가격보다 큰지(살 수 있는지) 여부 확인
+    isLarger() {
+        const idx = this.numWindowEl.innerText - 1;
+        this.price = this.menuData[idx].price;
+        this.money = this.coinsWindowEl.innerText;
+        return this.money > this.price;
+    }
+    // 모달창이 떴을 때 닫기 버튼 이벤트 핸들러
+    closeAlert({target}) {
+        const id = target.parentElement.parentElement.id;
+        if( id === 'alert_money') this.alertMoneyEl.classList.add('hidden');
+        else {
+            this.alertNumEl.classList.add('hidden');
+            this.numWindowEl.innerText = '';
+        }
     }
 }
 
@@ -162,5 +180,5 @@ viewOfNumber.setBoardEvent();
 viewOfNumber.setNumBtnEvent();
 viewOfNumber.setDelBtnEvent();
 
-const viewOfButton = new ViewOfButton(reference, walletData, menuData);
+const viewOfButton = new ViewOfButton(reference, menuData);
 viewOfButton.setSelectEvent();
