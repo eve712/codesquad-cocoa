@@ -62,35 +62,33 @@ class ViewOfWallet {
     }
 }
 
-// -----------------------● 메뉴 클릭했을 때 View 클래스 ●-----------------------
-class ViewOfBoard {
+// -----------------------● 번호 선택해서 num_window에 출력하는 View 클래스 ●-----------------------
+class ViewOfNumber {
     constructor(reference) {
         this.menuArr = [...reference.menu];
-        this.numWindowEl = reference.numWindow;
-    }
-    // board 클릭 이벤트
-    setBoardEvent() {
-        const elArr = this.menuArr.map(el => el.firstElementChild);
-        elArr.forEach(el => el.addEventListener('click', this.viewMenuNum.bind(this)));
-    }
-    // board 클릭 이벤트 핸들러
-    viewMenuNum({target}) {
-        const menuNum = target.nextElementSibling.innerText.split('. ')[0];
-        this.numWindowEl.innerText = menuNum;
-    }
-    
-}
-// -----------------------● 넘버패드 클릭했을 때 View 클래스 ●-----------------------
-class ViewOfButton {
-    constructor(reference) {
         this.numBtnsArr = [...reference.numberBtn];
         this.numWindowEl = reference.numWindow;
         this.delBtn = reference.deleteBtn;
     }
+    // elArr의 요소들에 클릭이벤트 설정해주는 함수
+    setClickEvent(elArr, func) {
+        elArr.forEach(el => el.addEventListener('click', func.bind(this)));
+    }
+
+    // board 클릭 이벤트
+    setBoardEvent() {
+        const elArr = this.menuArr.map(el => el.firstElementChild);
+        this.setClickEvent(elArr, this.viewMenuNum);
+    }
+    viewMenuNum({target}) {
+        const menuNum = target.nextElementSibling.innerText.split('. ')[0];
+        this.numWindowEl.innerText = menuNum;
+    }
+
     // 숫자 버튼 클릭 이벤트
     setNumBtnEvent() {
         const elArr = this.numBtnsArr;
-        elArr.forEach(el => el.addEventListener('click', this.viewNumber.bind(this)));
+        this.setClickEvent(elArr, this.viewNumber);
     }
     viewNumber({target}) {
         const num = target.innerText;
@@ -100,6 +98,7 @@ class ViewOfButton {
             this.numWindowEl.innerText += num;
         }
     }
+
     // 지우기 버튼 클릭 이벤트
     setDelBtnEvent() {
         this.delBtn.addEventListener('click', this.eraseNumber.bind(this));
@@ -111,6 +110,11 @@ class ViewOfButton {
     }
 }
 
+// -----------------------● 반환, 선택 버튼 클릭했을 때 View 클래스 ●-----------------------
+class ViewOfButton {
+    
+}
+
 
 
 // ------ test ------
@@ -118,9 +122,7 @@ const viewOfWallet = new ViewOfWallet(reference, walletData, menuData);
 viewOfWallet.viewWallet();
 viewOfWallet.setWalletEvent();
 
-const viewOfBoard = new ViewOfBoard(reference);
-viewOfBoard.setBoardEvent();
-
-const viewOfButton = new ViewOfButton(reference);
-viewOfButton.setNumBtnEvent();
-viewOfButton.setDelBtnEvent();
+const viewOfNumber = new ViewOfNumber(reference);
+viewOfNumber.setBoardEvent();
+viewOfNumber.setNumBtnEvent();
+viewOfNumber.setDelBtnEvent();
