@@ -257,6 +257,53 @@ body {
     line-height: 65px;
 }
 
+/* --------------- 모달창 --------------- */
+.hidden {
+    display: none;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.alert {
+    box-sizing: border-box;
+    width: 350px;
+    height: 180px;
+    padding: 50px 40px;
+    border-radius: 40px;
+    background-color: seashell;
+
+    font-size: 1.1em;
+    color: #222;
+    text-align: center;
+    line-height: 1.6;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.alert > button {
+    width: 60px;
+    height: 30px;
+    border: none;
+    background-color: rgb(255, 208, 187);
+    cursor: pointer;
+    outline: none;
+
+    font-size: 0.8em;
+    color: #222;
+
+    position: absolute;
+    bottom: 23px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 /* --------------- 기타 --------------- */
 .sticker {
     position: absolute;
