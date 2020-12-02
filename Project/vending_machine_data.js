@@ -1,3 +1,4 @@
+
 // -----------------------● Menu Data ●-----------------------
 // 메뉴데이터 생성자
 const DataTemplate = function(el, idx, obj) {
@@ -29,8 +30,6 @@ class MenuData {
 // 사이트가 로드될 때 지갑의 초기값을 설정해주는 클래스. (이후 변동은 view클래스에서 적용)
 class WalletData {
     constructor() {
-        // view 클래스에서 쓰려고 문자열로..
-        this.value = ['100', '500', '1000', '5000', '10000']; 
         this.moneyNumArr = [];
         this.total;
     }
@@ -49,14 +48,15 @@ class WalletData {
         ];
     }
     // 총 금액의 합 구하는 함수
-    sumAmount(obj) {
-        const num = obj.moneyNumArr;
-        this.total = obj.value.reduce((acc, curr, i) => acc + (curr * num[i]), 0);
+    sumAmount() {
+        const value = [100, 500, 1000, 5000, 10000];
+        const num = this.moneyNumArr;
+        this.total = value.reduce((acc, curr, i) => acc + (curr * num[i]), 0);
     }
     // 개수, 배열, 총합 구하는 함수
     initMoneyNum(min1, max1, min2, max2) {
         this.assignNumArr(min1, max1, min2, max2);
-        this.sumAmount(this);
+        this.sumAmount();
     }
 }
 
