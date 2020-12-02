@@ -82,6 +82,7 @@ class Node {
     }
     // 괄호, 숫자만 있는 배열 반환
     getPureArr(string) {
+        // ●●●inspector.getDataArr 함수를 쓰면 여러자리 숫자는 오류남. 수정 필요
         let dataArr = inspector.getDataArr(string);
         return dataArr.filter(this.braceNumFilter);
     }
