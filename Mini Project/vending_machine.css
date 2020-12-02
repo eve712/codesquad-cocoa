@@ -303,6 +303,20 @@ body {
     left: 50%;
     transform: translateX(-50%);
 }
+#alert_money > div {
+    padding: 60px 70px;
+    text-align: right;
+}
+#alert_money img {
+    width: 90px;
+    position: absolute;
+    top: 40px;
+    left: 55px;
+}
+#alert_money button {
+    bottom: 30px;
+    left: 225px;
+}
 
 /* --------------- 기타 --------------- */
 .sticker {
