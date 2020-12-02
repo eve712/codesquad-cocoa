@@ -29,10 +29,9 @@ class TownData {
         this.numOfTown;
         this.numOfHavingChild;
     }
-    // 랜덤으로 정수 반환
-    // min ~ (max + min - 1)까지
+    // 랜덤으로 정수 반환 min ~ max까지
     getRandomNum (min, max) {
-        const random = Math.floor(Math.random() * max) + min;
+        const random = Math.floor(Math.random() * (max - min + 1)) + min;
         return random;
     }
     // 마을의 이름 랜덤으로 정하는 함수, 중복이면 다시 정하기
@@ -92,13 +91,13 @@ class TownData {
     }
     // n개 이하로 마을 생성, 마을 노드가 들어있는 배열 반환
     getTownsArr(min, max) {
-        this.decideNum(min, max); // n개 이하로 마을 개수 랜덤 돌리기
+        this.decideNum(min, max); // 1, 5
         this.selectIdx(this.numOfHavingChild, this.numOfTown); // 자식을 가질 idx 뽑아 this.indexes
         const newTownsArr = this.createTown(this.numOfTown); // 마을 개수만큼 노드 만들어 배열로 반환
         return newTownsArr;
     }
-    pushFirstTown(n) {
-        const newTownArr = this.getTownsArr(2, n);
+    pushFirstTown(min, max) {
+        const newTownArr = this.getTownsArr(min, max); // 1, 5
         this.allTown = [...newTownArr];
     }
     // 부모 마을의 자식 형제는 n개 이하로..
@@ -111,9 +110,10 @@ class TownData {
                 this.createChildTown(n, parentArr[idx].child);
             });
         }
+        
     }
-    main(firstTown, childTown) {
-        this.pushFirstTown(firstTown); // 1차 마을 allTown배열에 push
+    main(min, max, childTown) {
+        this.pushFirstTown(min, max); // 1차 마을 allTown배열에 push
         this.createChildTown(childTown, this.allTown); // 자식마을 2개 이하
         console.log(this.allTown);
     }
@@ -196,17 +196,20 @@ class ViewTown {
         const childLength = [...townArr].map(el => this.getChildLength(el)); // 1차마을 자손 개수 배열
         return childLength;
     }
+    // 1차 마을 크기의 최솟값 배열
     getMinWidthArr(num) {
         const childLengthArr = this.getChildLengthArr(this.map);
         minWidthArr = childLengthArr.map(v => v * num);
         return minWidthArr;
     }
+ 
 }
 
 //------------test--------------
 let townData = new TownData();
-townData.main(5, 2);
+townData.main(1, 5, 2);
+console.log(townData.getRandomNum(0, 0));
 
 let viewTown = new ViewTown(townData);
 viewTown.main();
-viewTown.func(viewTown.map);
+
