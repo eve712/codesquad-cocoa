@@ -1,3 +1,4 @@
+
 // -----------------------● Menu Data ●-----------------------
 // 메뉴데이터 생성자
 const DataTemplate = function(el, idx, obj) {
@@ -67,7 +68,8 @@ const reference = {
     moneyWrap: document.getElementsByClassName('money_wrap'),
     walletTotal: document.getElementById('total'),
     process: document.getElementById('process'),
-    coinsWindow: document.getElementById('coins_window')
+    coinsWindow: document.getElementById('coins_window'),
+    numWindow: document.getElementById('num_window')
 }
 
 
