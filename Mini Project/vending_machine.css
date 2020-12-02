@@ -4,14 +4,15 @@ body {
 #header {
     background-color: rgb(211, 60, 60);
     border-radius: 25px;
-    width: 19rem;
-    height: 3.5rem;
-    margin: 1.5rem 0 1.5rem 30rem;
+    width: 25rem;
+    height: 4rem;
+    margin: 1.4rem 0 0.7rem 20rem;
 
-    font-size: 1.7em;
+    font-family: "Bungee Inline", cursive;
+    font-size: 1.8em;
     color: seashell;
     text-align: center;
-    line-height: 3.5rem;
+    line-height: 4rem;
 }
 #container {
     width: 1400px;
@@ -24,7 +25,6 @@ body {
     padding: 25px;
     margin-left: 32px;
     border-radius: 40px;
-    /* background-color: rgb(228, 96, 79); */
     background-color: rgb(201, 65, 65);
 }
 
@@ -69,6 +69,16 @@ body {
     background-color: rgb(255, 188, 188);
     font-weight: 600;
     color: #111;
+}
+.possible_name {
+    background-color: #79ad72;
+    color: seashell;
+    font-weight: 600;
+}
+.possible_price {
+    background-color: #55854e;
+    color: seashell;
+    font-weight: 600;
 }
 
 /* ---------------사용자--------------- */
@@ -211,11 +221,18 @@ body {
     color: #333;
 }
 .money_btn {
+    font-size: 1em;
     cursor: pointer;
     outline-style: none;
 }
+.money_btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px -8px,
+        rgba(0, 0, 0, 0.024) 0px -6px 16px -6px;
+}
 .money_num {
-    line-height: 40px;
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 45px;
     text-align: center;
 }
 #total {
@@ -227,8 +244,10 @@ body {
     font-size: 2em;
     color: #333;
     text-align: center;
-    line-height: 60px;
+    line-height: 65px;
 }
+
+/* --------------- 기타 --------------- */
 .sticker {
     position: absolute;
     width: 48px;
@@ -244,14 +263,28 @@ body {
     transform: rotate(-8deg);
 }
 #best1 {
-    top: 134px;
+    top: 130px;
     left: 230px;
 }
 #best2 {
-    top: 427px;
+    top: 423px;
     left: 78px;
 }
 #new {
-    top: 583px;
+    top: 575px;
     left: 555px;
+}
+.column {
+    width: 20px;
+    height: 15px;
+    background-color: #444;
+    position: absolute;
+}
+#left {
+    top: 85px;
+    left: 370px;
+}
+#right {
+    top: 85px;
+    left: 650px;
 }
