@@ -112,12 +112,47 @@ class ViewOfNumber {
 
 // -----------------------● 반환, 선택 버튼 클릭했을 때 View 클래스 ●-----------------------
 class ViewOfButton {
-    
+    constructor(reference, walletData, {menuDataArr}) {
+        this.returnBtn = reference.buttonBox.firstElementChild;
+        this.selectBtn = reference.buttonBox.lastElementChild;
+        this.numWindowEl = reference.numWindow;
+        this.alertNum = reference.alertNum;
+        this.closeBtn = reference.alertNum.firstElementChild.lastElementChild;
+        this.menuData = menuDataArr; // 매뉴데이터 - 배열
+        this.walletData = walletData; // 지갑데이터 - 객체
+    }
+    // 선택 버튼 클릭 이벤트
+    setSelectEvent() {
+        this.selectBtn.addEventListener('click', this.checkNumber.bind(this));
+        this.closeBtn.addEventListener('click', this.closeAlert.bind(this));
+    }
+    checkNumber() {
+        if(!this.isExisting) this.alertNum.classList.remove('hidden');
+        else {
+
+        }
+    }
+    // 입력한 번호의 메뉴가 존재하는지 확인
+    isExisting() {
+        const number = this.numWindowEl.innerText;
+        const numOfMenu = this.menuData.length;
+        const result = number > 0 && number <= numOfMenu;
+        return result;
+    }
+    closeAlert() {
+        this.alertNum.classList.add('hidden');
+        this.numWindowEl.innerText = '';
+    }
+
+    // 반환 버튼 클릭 이벤트
+    setReturnEvent() {
+        
+    }
 }
 
 
 
-// ------ test ------
+// ------● 실행 ●------
 const viewOfWallet = new ViewOfWallet(reference, walletData, menuData);
 viewOfWallet.viewWallet();
 viewOfWallet.setWalletEvent();
@@ -126,3 +161,6 @@ const viewOfNumber = new ViewOfNumber(reference);
 viewOfNumber.setBoardEvent();
 viewOfNumber.setNumBtnEvent();
 viewOfNumber.setDelBtnEvent();
+
+const viewOfButton = new ViewOfButton(reference, walletData, menuData);
+viewOfButton.setSelectEvent();
