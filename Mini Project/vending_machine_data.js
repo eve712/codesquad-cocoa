@@ -69,7 +69,13 @@ const reference = {
     walletTotal: document.getElementById('total'),
     process: document.getElementById('process'),
     coinsWindow: document.getElementById('coins_window'),
-    numWindow: document.getElementById('num_window')
+    numWindow: document.getElementById('num_window'),
+    numberBtn: document.getElementsByClassName('number'),
+    deleteBtn: document.getElementById('del_btn'),
+    buttonBox: document.getElementById('btn_box'),
+    alertNum: document.getElementById('alert_num'), // 모달창
+    alertMoney: document.getElementById('alert_money'), // 모달창
+    closeBtns: [...document.getElementsByClassName('alert')].map(el => el.lastElementChild)
 }
 
 
