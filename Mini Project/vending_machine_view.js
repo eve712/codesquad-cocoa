@@ -1,9 +1,11 @@
 class ViewMachine {
-    constructor(reference, walletData) {
+    constructor(reference, walletData, {menuDataArr}) {
+        this.menuArr = [...reference.menu];
         this.wrapArr = [...reference.moneyWrap];
         this.totalEl = reference.walletTotal;
         this.processEl = reference.process;
         this.coinsWindowEl = reference.coinsWindow;
+        this.menuData = menuDataArr; // 매뉴데이터 - 배열
         this.walletData = walletData; // 지갑데이터 - 객체
         this.coinsWindow = 0;
     }
@@ -28,6 +30,7 @@ class ViewMachine {
             this.fixWallet(idx);
             this.viewProcess(text);
             this.viewCoinsWindow(amount);
+            this.viewPossibleMenu();
         };
     }
     // this.wallet 값을 변경 (moneyNumArr 현금 개수, total 합계)
@@ -46,10 +49,20 @@ class ViewMachine {
         this.coinsWindow += num;
         this.coinsWindowEl.innerText = this.coinsWindow;
     }
+    // 구매가능한 메뉴에 클래스 추가
+    viewPossibleMenu() {
+        const objArr = this.menuData.filter(el => el.price <= this.coinsWindow);
+        const idxArr = objArr.map(el => el.number - 1);
+        console.log(idxArr);
+        idxArr.forEach(idx => {
+            this.menuArr[idx].firstElementChild.nextElementSibling.classList.add('possible_name');
+            this.menuArr[idx].lastElementChild.classList.add('possible_price');
+        });
+    }
 }
 
 
 // ------ test ------
-const viewMachine = new ViewMachine(reference, walletData);
+const viewMachine = new ViewMachine(reference, walletData, menuData);
 viewMachine.viewWallet();
 viewMachine.setWalletEvent();
