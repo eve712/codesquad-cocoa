@@ -34,10 +34,12 @@ class WalletData {
         this.value = ['100', '500', '1000', '5000', '10000']; 
         this.moneyNumArr = [];
         this.total;
+        this.coinsWindow = 0;
     }
-    getRandomNum (min, max) {
-        const random = Math.floor(Math.random() * (max - min + 1)) + min;
-        return random;
+    // 개수, 배열, 총합 구하는 함수
+    initMoneyNum(min1, max1, min2, max2) {
+        this.assignNumArr(min1, max1, min2, max2);
+        this.sumAmount(this);
     }
     // 동전, 지폐 개수 랜덤 뽑아 배열에 저장
     assignNumArr(min1, max1, min2, max2) {
@@ -49,15 +51,21 @@ class WalletData {
             this.getRandomNum(min2, max2), // 1000
         ];
     }
+    getRandomNum (min, max) {
+        const random = Math.floor(Math.random() * (max - min + 1)) + min;
+        return random;
+    }
     // 총 금액의 합 구하는 함수
     sumAmount(obj) {
         const num = obj.moneyNumArr;
         this.total = obj.value.reduce((acc, curr, i) => acc + (curr * num[i]), 0);
     }
-    // 개수, 배열, 총합 구하는 함수
-    initMoneyNum(min1, max1, min2, max2) {
-        this.assignNumArr(min1, max1, min2, max2);
-        this.sumAmount(this);
+    // view 클래스에서 사용하는 coinsWindow 데이터 관리 함수
+    setCoinsWindow(money) {
+        this.coinsWindow = money;
+    }
+    addCoinsWindow(money) {
+        this.coinsWindow += money;
     }
 }
 
