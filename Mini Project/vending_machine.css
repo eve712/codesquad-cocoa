@@ -54,6 +54,16 @@ body {
     object-fit: contain;
     cursor: pointer;
 }
+.width_hover:hover {
+    width: 100px;
+    margin: 0 5px;
+    object-fit: contain;
+}
+.height_hover:hover {
+    height: 79px;
+    margin: 3px 0;
+    object-fit: contain;
+}
 .menu_name,
 .menu_price {
     height: 19px;
