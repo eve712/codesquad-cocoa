@@ -85,6 +85,7 @@ class ViewOfButton {
     constructor(reference) {
         this.numBtnsArr = [...reference.numberBtn];
         this.numWindowEl = reference.numWindow;
+        this.delBtn = reference.deleteBtn;
     }
     // 숫자 버튼 클릭 이벤트
     setNumBtnEvent() {
@@ -98,6 +99,15 @@ class ViewOfButton {
         else {
             this.numWindowEl.innerText += num;
         }
+    }
+    // 지우기 버튼 클릭 이벤트
+    setDelBtnEvent() {
+        this.delBtn.addEventListener('click', this.eraseNumber.bind(this));
+    }
+    eraseNumber() {
+        const text = this.numWindowEl.innerText;
+        const length = text.length;
+        this.numWindowEl.innerText = text.substring(0, length - 1);
     }
 }
 
@@ -113,3 +123,4 @@ viewOfBoard.setBoardEvent();
 
 const viewOfButton = new ViewOfButton(reference);
 viewOfButton.setNumBtnEvent();
+viewOfButton.setDelBtnEvent();
