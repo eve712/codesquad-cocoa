@@ -1,4 +1,6 @@
-class ViewMachine {
+
+// -----------------------● 지갑 클릭했을 때 View 클래스 ●-----------------------
+class ViewOfWallet {
     constructor(reference, walletData, {menuDataArr}) {
         this.menuArr = [...reference.menu];
         this.wrapArr = [...reference.moneyWrap];
@@ -9,18 +11,12 @@ class ViewMachine {
         this.walletData = walletData; // 지갑데이터 - 객체
         this.coinsWindow = 0;
     }
-    // this.wallet의 데이터를 사용 → wallet 개수, 합계 출력
-    viewWallet() {
-        const elArr = this.wrapArr.map(el => el.lastElementChild);
-        elArr.forEach((el, i) => el.innerText = this.walletData.moneyNumArr[i]);
-        this.totalEl.innerText = this.walletData.total;
-    }
-
     // wallet 클릭 이벤트
     setWalletEvent() {
         const elArr = this.wrapArr.map(el => el.firstElementChild);
         elArr.forEach(el => el.addEventListener('click', this.checkWallet.bind(this)));
     }
+    // wallet 클릭 이벤트 핸들러
     checkWallet({target}) {
         const text = target.innerText;
         const amount = text.substring(0, text.length - 1);
@@ -38,6 +34,12 @@ class ViewMachine {
         this.walletData.moneyNumArr[idx]--;
         this.walletData.sumAmount(this.walletData);
         this.viewWallet();
+    }
+    // this.wallet의 데이터를 사용 → wallet 개수, 합계 출력
+    viewWallet() {
+        const elArr = this.wrapArr.map(el => el.lastElementChild);
+        elArr.forEach((el, i) => el.innerText = this.walletData.moneyNumArr[i]);
+        this.totalEl.innerText = this.walletData.total;
     }
     // process창에 과정 출력
     viewProcess(text) {
@@ -61,8 +63,30 @@ class ViewMachine {
     }
 }
 
+// -----------------------● 메뉴 클릭했을 때 View 클래스 ●-----------------------
+class ViewOfBoard {
+    constructor(reference) {
+        this.menuArr = [...reference.menu];
+        this.numWindowEl = reference.numWindow;
+    }
+    // board 클릭 이벤트
+    setBoardEvent() {
+        const elArr = this.menuArr.map(el => el.firstElementChild);
+        elArr.forEach(el => el.addEventListener('click', this.viewMenuNum.bind(this)));
+    }
+    // board 클릭 이벤트 핸들러
+    viewMenuNum({target}) {
+        const menuNum = target.nextElementSibling.innerText.split('. ')[0];
+        this.numWindowEl.innerText = menuNum;
+    }
+}
+
+
 
 // ------ test ------
-const viewMachine = new ViewMachine(reference, walletData, menuData);
-viewMachine.viewWallet();
-viewMachine.setWalletEvent();
+const viewOfWallet = new ViewOfWallet(reference, walletData, menuData);
+viewOfWallet.viewWallet();
+viewOfWallet.setWalletEvent();
+
+const viewOfBoard = new ViewOfBoard(reference);
+viewOfBoard.setBoardEvent();
