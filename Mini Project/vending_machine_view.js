@@ -55,7 +55,6 @@ class ViewOfWallet {
     viewPossibleMenu() {
         const objArr = this.menuData.filter(el => el.price <= this.coinsWindow);
         const idxArr = objArr.map(el => el.number - 1);
-        console.log(idxArr);
         idxArr.forEach(idx => {
             this.menuArr[idx].firstElementChild.nextElementSibling.classList.add('possible_name');
             this.menuArr[idx].lastElementChild.classList.add('possible_price');
@@ -79,6 +78,27 @@ class ViewOfBoard {
         const menuNum = target.nextElementSibling.innerText.split('. ')[0];
         this.numWindowEl.innerText = menuNum;
     }
+    
+}
+// -----------------------● 넘버패드 클릭했을 때 View 클래스 ●-----------------------
+class ViewOfButton {
+    constructor(reference) {
+        this.numBtnsArr = [...reference.numberBtn];
+        this.numWindowEl = reference.numWindow;
+    }
+    // 숫자 버튼 클릭 이벤트
+    setNumBtnEvent() {
+        const elArr = this.numBtnsArr;
+        elArr.forEach(el => el.addEventListener('click', this.viewNumber.bind(this)));
+    }
+    viewNumber({target}) {
+        const num = target.innerText;
+        const text = this.numWindowEl.innerText;
+        if(text.length == 2) return;
+        else {
+            this.numWindowEl.innerText += num;
+        }
+    }
 }
 
 
@@ -90,3 +110,6 @@ viewOfWallet.setWalletEvent();
 
 const viewOfBoard = new ViewOfBoard(reference);
 viewOfBoard.setBoardEvent();
+
+const viewOfButton = new ViewOfButton(reference);
+viewOfButton.setNumBtnEvent();
