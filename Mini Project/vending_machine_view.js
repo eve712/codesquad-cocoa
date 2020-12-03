@@ -46,8 +46,8 @@ class ViewOfWallet {
     }
     // coins window창에 투입 금액 출력
     viewCoinsWindow(amount) {
-        this.walletData.addCoinsWindow(parseInt(amount));
-        this.coinsWindowEl.innerText = this.walletData.coinsWindow;
+        this.walletData.addCoinsWindow(parseInt(amount)); // 데이터 클래스의 함수로 데이터 수정
+        this.coinsWindowEl.innerText = this.walletData.coinsWindow; // 수정된 데이터값을 불러와서 적용
     }
     // 구매가능한 메뉴에 클래스 추가
     viewPossibleMenu(money) {
@@ -151,6 +151,7 @@ class ViewOfSelectBtn {
     // 투입된 금액, 가격 확인하고, 금액 차감
     checkMoney() {
         const isLarger = this.isLarger();
+        console.log(isLarger);
         if(!isLarger) this.alertMoneyEl.classList.remove('hidden');
         else {
             this.viewProcess();
@@ -161,9 +162,9 @@ class ViewOfSelectBtn {
     // 투입된 돈이 가격보다 큰지(살 수 있는지) 여부 확인
     isLarger() {
         const idx = this.numWindowEl.innerText - 1;
-        this.price = this.menuData[idx].price;
-        this.money = this.coinsWindowEl.innerText;
-        return this.money > this.price;
+        this.price = parseInt(this.menuData[idx].price);
+        this.money = parseInt(this.coinsWindowEl.innerText);
+        return this.money >= this.price;
     }
     // process창에 과정 출력
     viewProcess() {
@@ -192,6 +193,35 @@ class ViewOfSelectBtn {
         }
     }
 }
+// -----------------------● 반환 버튼 클릭했을 때 View 클래스 ●-----------------------
+class ViewOfReturnBtn {
+    constructor(reference, walletData) {
+        this.returnBtn = reference.buttonBox.firstElementChild;
+        this.walletData = walletData;
+        this.quotient = 0;
+        this.remainder = 0;
+    }
+    // 선택 버튼 클릭 이벤트
+    setReturnEvent() {
+        this.returnBtn.addEventListener('click', );
+    }
+    calculateNum() {
+        const money = this.walletData.coinsWindow;
+        if (money > 10000)
+        else if (money > 5000)
+        else if (money > 1000)
+        else if (money > 500)
+        else 
+    }
+    divideCash(money, divisor) {
+        const quotient = parseInt(money / divisor);
+        const remainder = money - (quotient * divisor);
+        this.quotient = quotient;
+        this.remainder = remainder;
+    }
+
+
+}
 
 
 
@@ -207,3 +237,5 @@ viewOfNumber.setDelBtnEvent();
 
 const viewOfSelectBtn = new ViewOfSelectBtn(reference, menuData, walletData, viewOfWallet);
 viewOfSelectBtn.setSelectEvent();
+
+const viewOfReturnBtn = new ViewOfReturnBtn(reference, walletData);
