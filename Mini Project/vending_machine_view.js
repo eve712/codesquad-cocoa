@@ -194,9 +194,10 @@ class ViewOfSelectBtn {
 }
 // -----------------------● 반환 버튼 클릭했을 때 View 클래스 ●-----------------------
 class ViewOfReturnBtn {
-    constructor(reference, walletData) {
+    constructor(reference, walletData, viewOfWallet) {
         this.returnBtn = reference.buttonBox.firstElementChild;
         this.walletData = walletData;
+        this.viewOfWallet = viewOfWallet;
         this.money = 0;
         this.quotient = 0;
     }
@@ -215,10 +216,17 @@ class ViewOfReturnBtn {
             }
         });
         this.walletData.value.reverse(); // 위에서 walletData.value 배열이 reverse된 것을 되돌려줌
+        this.fixWallet(walletArr);
     }
     divideCash(divisor) {
         this.quotient = parseInt(this.money / divisor);
         this.money -= this.quotient * divisor;
+    }
+    // 지갑 현금 개수, 합계 데이터 변경, 화면에 출력
+    fixWallet(walletArr) {
+        this.walletData.moneyNumArr = walletArr.reverse(); 
+        this.walletData.sumAmount(this.walletData); 
+        this.viewOfWallet.viewWallet(); 
     }
 }
 
@@ -237,5 +245,5 @@ viewOfNumber.setDelBtnEvent();
 const viewOfSelectBtn = new ViewOfSelectBtn(reference, menuData, walletData, viewOfWallet);
 viewOfSelectBtn.setSelectEvent();
 
-const viewOfReturnBtn = new ViewOfReturnBtn(reference, walletData);
+const viewOfReturnBtn = new ViewOfReturnBtn(reference, walletData, viewOfWallet);
 viewOfReturnBtn.setReturnEvent();
