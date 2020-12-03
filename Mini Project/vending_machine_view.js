@@ -151,7 +151,6 @@ class ViewOfSelectBtn {
     // 투입된 금액, 가격 확인하고, 금액 차감
     checkMoney() {
         const isLarger = this.isLarger();
-        console.log(isLarger);
         if(!isLarger) this.alertMoneyEl.classList.remove('hidden');
         else {
             this.viewProcess();
@@ -198,29 +197,29 @@ class ViewOfReturnBtn {
     constructor(reference, walletData) {
         this.returnBtn = reference.buttonBox.firstElementChild;
         this.walletData = walletData;
+        this.money = 0;
         this.quotient = 0;
-        this.remainder = 0;
     }
     // 선택 버튼 클릭 이벤트
     setReturnEvent() {
-        this.returnBtn.addEventListener('click', );
+        this.returnBtn.addEventListener('click', this.calculateNum.bind(this));
     }
     calculateNum() {
-        const money = this.walletData.coinsWindow;
-        if (money > 10000)
-        else if (money > 5000)
-        else if (money > 1000)
-        else if (money > 500)
-        else 
+        this.money = this.walletData.coinsWindow;
+        const valueArr = this.walletData.value.reverse().map(el => parseInt(el));
+        const walletArr = this.walletData.moneyNumArr.reverse();
+        valueArr.forEach((el, i) => {
+            if(this.money >= el) {
+                this.divideCash(el);
+                walletArr[i] += this.quotient; 
+            }
+        });
+        this.walletData.value.reverse(); // 위에서 walletData.value 배열이 reverse된 것을 되돌려줌
     }
-    divideCash(money, divisor) {
-        const quotient = parseInt(money / divisor);
-        const remainder = money - (quotient * divisor);
-        this.quotient = quotient;
-        this.remainder = remainder;
+    divideCash(divisor) {
+        this.quotient = parseInt(this.money / divisor);
+        this.money -= this.quotient * divisor;
     }
-
-
 }
 
 
@@ -239,3 +238,4 @@ const viewOfSelectBtn = new ViewOfSelectBtn(reference, menuData, walletData, vie
 viewOfSelectBtn.setSelectEvent();
 
 const viewOfReturnBtn = new ViewOfReturnBtn(reference, walletData);
+viewOfReturnBtn.setReturnEvent();
