@@ -198,6 +198,7 @@ class ViewOfReturnBtn {
     constructor(reference, walletData, viewOfWallet) {
         this.returnBtn = reference.buttonBox.firstElementChild;
         this.coinsWindowEl = reference.coinsWindow;
+        this.numWindowEl = reference.numWindow;
         this.walletData = walletData;
         this.viewOfWallet = viewOfWallet;
         this.money = 0;
@@ -221,6 +222,7 @@ class ViewOfReturnBtn {
         this.fixWallet(walletArr);
         this.fixCoinsWindow(this.money);
         this.viewOfWallet.removePossible();
+        this.numWindowEl.innerText = '';
     }
     divideCash(divisor) {
         this.quotient = parseInt(this.money / divisor);
