@@ -42,7 +42,16 @@ class ViewOfWallet {
     }
     // process창에 과정 출력
     viewProcess(text) {
+        this.removeFirstEl();
         this.processEl.innerHTML += `<span> ${text} 투입!</span> <br>`;
+    }
+    // process창의 요소 개수가 6개 이상이면 가장 앞의 요소 제거
+    removeFirstEl() {
+        const childArr = [...this.processEl.children];
+        if(childArr.length > 10) {
+            this.processEl.removeChild(childArr[0]);
+            this.processEl.removeChild(childArr[1]);
+        };
     }
     // coins window창에 투입 금액 출력
     viewCoinsWindow(amount) {
@@ -167,6 +176,7 @@ class ViewOfSelectBtn {
     }
     // process창에 과정 출력
     viewProcess() {
+        this.viewOfWallet.removeFirstEl();
         const number = this.numWindowEl.innerText;
         const name = this.menuData[number - 1].name;
         this.processEl.innerHTML += `<span> ${number}번 ${name} 구매 완료!</span> <br>`;
@@ -212,6 +222,7 @@ class ViewOfReturnBtn {
     }
     // process창에 과정 출력
     viewProcess() {
+        this.viewOfWallet.removeFirstEl();
         this.money = this.walletData.coinsWindow;
         this.processEl.innerHTML += `<span> ${this.money}원 반환 완료!</span> <br>`;
     }
@@ -242,7 +253,6 @@ class ViewOfReturnBtn {
     }
     // coinsWindow 데이터값 변경, 요소 innerText 변경
     fixCoinsWindow() {
-        console.log(this.money);
         this.walletData.setCoinsWindow(this.money); 
         this.coinsWindowEl.innerText = '';
     }
