@@ -105,9 +105,9 @@ body {
 #sales {
     position: absolute;
     top: 36px;
-    left: 770px;
+    left: 760px;
 
-    width: 200px;
+    width: 190px;
     height: 50px;
     border-radius: 20px;
     background-color: rgb(250, 231, 121);
@@ -116,6 +116,25 @@ body {
     text-align: center;
     line-height: 53px;
 }
+#soldBtn {
+    position: absolute;
+    top: 42px;
+    left: 955px;
+
+    box-sizing: border-box;
+    width: 37px;
+    height: 37px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(250, 231, 121);
+
+    font-size: 1em;
+    color: rgb(209, 189, 78);
+    line-height: 34px;
+    outline: none;
+    cursor: pointer;
+}
+
 #coins_window {
     box-sizing: border-box;
     width: 240px;
@@ -335,6 +354,19 @@ body {
 #alert_money button {
     bottom: 30px;
     left: 225px;
+}
+
+#alert_soldItems > div {
+    height: 300px;
+    padding: 23px 45px 50px 70px;
+}
+#soldItems {
+    text-align: left;
+    height: 220px;
+    overflow: scroll;
+}
+#alert_soldItems button {
+    bottom: 17px;
 }
 
 /* --------------- 기타 --------------- */
