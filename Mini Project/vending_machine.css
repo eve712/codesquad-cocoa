@@ -102,6 +102,20 @@ body {
     border-radius: 29px;
     background-color: rgb(211, 77, 77);
 }
+#sales {
+    position: absolute;
+    top: 36px;
+    left: 770px;
+
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: rgb(250, 231, 121);
+
+    color: #333;
+    text-align: center;
+    line-height: 53px;
+}
 #coins_window {
     box-sizing: border-box;
     width: 240px;
