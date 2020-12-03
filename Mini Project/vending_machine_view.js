@@ -207,11 +207,15 @@ class ViewOfReturnBtn {
     }
     // 선택 버튼 클릭 이벤트
     setReturnEvent() {
+        this.returnBtn.addEventListener('click', this.viewProcess.bind(this));
         this.returnBtn.addEventListener('click', this.calculateNum.bind(this));
     }
-    calculateNum() {
+    // process창에 과정 출력
+    viewProcess() {
         this.money = this.walletData.coinsWindow;
-        this.viewProcess(this.money);
+        this.processEl.innerHTML += `<span> ${this.money}원 반환 완료!</span> <br>`;
+    }
+    calculateNum() {
         const valueArr = this.walletData.value.reverse().map(el => parseInt(el));
         const walletArr = this.walletData.moneyNumArr.reverse();
         valueArr.forEach((el, i) => {
@@ -222,7 +226,7 @@ class ViewOfReturnBtn {
         });
         this.walletData.value.reverse(); // 위에서 walletData.value 배열이 reverse된 것을 되돌려줌
         this.fixWallet(walletArr);
-        this.fixCoinsWindow(this.money);
+        this.fixCoinsWindow();
         this.viewOfWallet.removePossible();
         this.numWindowEl.innerText = '';
     }
@@ -237,13 +241,10 @@ class ViewOfReturnBtn {
         this.viewOfWallet.viewWallet(); 
     }
     // coinsWindow 데이터값 변경, 요소 innerText 변경
-    fixCoinsWindow(result) {
-        this.walletData.setCoinsWindow(result); 
+    fixCoinsWindow() {
+        console.log(this.money);
+        this.walletData.setCoinsWindow(this.money); 
         this.coinsWindowEl.innerText = '';
-    }
-    // process창에 과정 출력
-    viewProcess(number) {
-        this.processEl.innerHTML += `<span> ${number}원 반환 완료!</span> <br>`;
     }
 }
 
