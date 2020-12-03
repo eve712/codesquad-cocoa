@@ -27,6 +27,11 @@ class MenuData {
 
 
 // -----------------------● Wallet Data ●-----------------------
+const SoldItemTemplate = function(number, name) {
+    this.number = number;
+    this.name = name;
+    this.times = 1;
+}
 // 사이트가 로드될 때 지갑의 초기값을 설정해주는 클래스. (이후 변동은 view클래스에서 적용)
 class WalletData {
     constructor() {
@@ -34,8 +39,9 @@ class WalletData {
         this.value = ['100', '500', '1000', '5000', '10000']; 
         this.moneyNumArr = [];
         this.total;
-        this.sales = 0;
         this.coinsWindow = 0;
+        this.sales = 0;
+        this.soldItems = [];
     }
     // 개수, 배열, 총합 구하는 함수
     initMoneyNum(min1, max1, min2, max2) {
@@ -68,6 +74,17 @@ class WalletData {
     addCoinsWindow(money) {
         this.coinsWindow += money;
     }
+    // 매개변수로 받은 아이템이 soldItems 배열에 있는지 확인해서
+    // 없으면 객체를 생성, 있으면 판매횟수 +1
+    putSoldItem(number, name) {
+        const soldItemNum = this.soldItems.map(el => el.number);
+        const idx = soldItemNum.indexOf(number);
+        if(idx === -1) {
+            const soldItem = new SoldItemTemplate(number, name);
+            this.soldItems.push(soldItem);
+        }
+        else this.soldItems[idx].times++;
+    }
 }
 
 
@@ -77,7 +94,9 @@ const reference = {
     moneyWrap: document.getElementsByClassName('money_wrap'),
     walletTotal: document.getElementById('total'),
     process: document.getElementById('process'),
+    soldBtn: document.getElementById('soldBtn'),
     sales: document.getElementById('sales'),
+    soldItems: document.getElementById('soldItems'),
     coinsWindow: document.getElementById('coins_window'),
     numWindow: document.getElementById('num_window'),
     numberBtn: document.getElementsByClassName('number'),
@@ -85,6 +104,7 @@ const reference = {
     buttonBox: document.getElementById('btn_box'),
     alertNum: document.getElementById('alert_num'), // 모달창
     alertMoney: document.getElementById('alert_money'), // 모달창
+    alertSold: document.getElementById('alert_soldItems'), //모달창
     closeBtns: [...document.getElementsByClassName('alert')].map(el => el.lastElementChild)
 }
 
