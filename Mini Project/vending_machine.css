@@ -73,6 +73,7 @@ body {
     color: #222;
     text-align: center;
     line-height: 24px;
+    cursor: default;
 }
 .menu_price {
     margin-top: 3px;
@@ -113,6 +114,7 @@ body {
     color: rgb(217, 255, 78);
     line-height: 60px;
     text-align: right;
+    cursor: default;
 }
 #btn_box {
     box-sizing: border-box;
@@ -146,6 +148,7 @@ body {
     color: rgb(217, 255, 78);
     line-height: 60px;
     text-align: right;
+    cursor: default;
 }
 #num_pad {
     height: 300px;
@@ -193,6 +196,7 @@ body {
     background-color: #fffdfd;
     color: #333;
     line-height: 1.5;
+    cursor: default;
 }
 
 /* --------------- 지갑 --------------- */
@@ -243,6 +247,7 @@ body {
     font-weight: 600;
     line-height: 45px;
     text-align: center;
+    cursor: default;
 }
 #total {
     width: 200px;
@@ -254,6 +259,7 @@ body {
     color: #333;
     text-align: center;
     line-height: 65px;
+    cursor: default;
 }
 
 /* --------------- 모달창 --------------- */
@@ -331,6 +337,7 @@ body {
     text-align: center;
     line-height: 25px;
     transform: rotate(-8deg);
+    cursor: default;
 }
 #best1 {
     top: 130px;
