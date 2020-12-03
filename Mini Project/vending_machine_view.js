@@ -128,6 +128,7 @@ class ViewOfSelectBtn {
     constructor(reference, {menuDataArr}, walletData, viewOfWallet) {
         this.selectBtn = reference.buttonBox.lastElementChild;
         this.closeBtns = reference.closeBtns;
+        this.salesEl = reference.sales;
         this.coinsWindowEl = reference.coinsWindow;
         this.numWindowEl = reference.numWindow;
         this.alertNumEl = reference.alertNum; // 모달창
@@ -162,6 +163,7 @@ class ViewOfSelectBtn {
         const isLarger = this.isLarger();
         if(!isLarger) this.alertMoneyEl.classList.remove('hidden');
         else {
+            this.fixSales();
             this.viewProcess();
             this.viewChange();
             this.updatePossible(this.walletData.coinsWindow);
@@ -174,12 +176,17 @@ class ViewOfSelectBtn {
         this.money = parseInt(this.coinsWindowEl.innerText);
         return this.money >= this.price;
     }
+    // 매출 데이터 수정, 출력
+    fixSales() {
+        this.walletData.sales += this.price;
+        this.salesEl.innerText = `오늘 매출: ${this.walletData.sales}원`
+    }
     // process창에 과정 출력
     viewProcess() {
         this.viewOfWallet.removeFirstEl();
         const number = this.numWindowEl.innerText;
         const name = this.menuData[number - 1].name;
-        this.processEl.innerHTML += `<span> ${number}번 ${name} 구매 완료!</span> <br>`;
+        this.processEl.innerHTML += `<span> ${number}번 ${name} 구매 완료 🍽</span> <br>`;
     }
     // 금액 차감, 잔돈 출력
     viewChange() {
@@ -224,7 +231,7 @@ class ViewOfReturnBtn {
     viewProcess() {
         this.viewOfWallet.removeFirstEl();
         this.money = this.walletData.coinsWindow;
-        this.processEl.innerHTML += `<span> ${this.money}원 반환 완료!</span> <br>`;
+        this.processEl.innerHTML += `<span> ${this.money}원 반환!</span> <br>`;
     }
     calculateNum() {
         const valueArr = this.walletData.value.reverse().map(el => parseInt(el));
