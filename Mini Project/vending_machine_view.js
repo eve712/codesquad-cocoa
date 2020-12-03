@@ -82,6 +82,8 @@ class ViewOfNumber {
         this.numBtnsArr = [...reference.numberBtn];
         this.numWindowEl = reference.numWindow;
         this.delBtn = reference.deleteBtn;
+        this.soldBtn = reference.soldBtn;
+        this.alertSoldEl = reference.alertSold;
     }
     // elArr의 요소들에 클릭이벤트 설정해주는 함수
     setClickEvent(elArr, func) {
@@ -121,6 +123,14 @@ class ViewOfNumber {
         const length = text.length;
         this.numWindowEl.innerText = text.substring(0, length - 1);
     }
+
+    // 판매 기록 버튼 클릭 이벤트
+    setSoldBtnEvent() {
+        this.soldBtn.addEventListener('click', this.viewSoldItems.bind(this));
+    }
+    viewSoldItems() {
+        this.alertSoldEl.classList.remove('hidden');
+    }
 }
 
 // -----------------------● 선택 버튼 클릭했을 때 View 클래스 ●-----------------------
@@ -129,10 +139,12 @@ class ViewOfSelectBtn {
         this.selectBtn = reference.buttonBox.lastElementChild;
         this.closeBtns = reference.closeBtns;
         this.salesEl = reference.sales;
+        this.soldItemsEl = reference.soldItems;
         this.coinsWindowEl = reference.coinsWindow;
         this.numWindowEl = reference.numWindow;
         this.alertNumEl = reference.alertNum; // 모달창
         this.alertMoneyEl = reference.alertMoney; // 모달창
+        this.alertSoldEl = reference.alertSold; // 모달창
         this.processEl = reference.process;
         this.menuData = menuDataArr; // 매뉴데이터 - 배열
         this.walletData = walletData; // 지갑데이터 - 객체
@@ -165,6 +177,7 @@ class ViewOfSelectBtn {
         else {
             this.fixSales();
             this.viewProcess();
+            this.viewSoldItems();
             this.viewChange();
             this.updatePossible(this.walletData.coinsWindow);
         }
@@ -187,7 +200,17 @@ class ViewOfSelectBtn {
         const number = this.numWindowEl.innerText;
         const name = this.menuData[number - 1].name;
         this.processEl.innerHTML += `<span> ${number}번 ${name} 구매 완료 🍽</span> <br>`;
+        this.walletData.putSoldItem(number, name);
     }
+    viewSoldItems() {
+        const soldItems = this.walletData.soldItems;
+        this.soldItemsEl.innerHTML = ''; 
+        soldItems.forEach(el => {
+            const text = `${el.number}번 ${el.name}: ${el.times}개`;
+            this.soldItemsEl.innerHTML += `<span>${text}</span> <br>`;    
+        });
+    }
+    
     // 금액 차감, 잔돈 출력
     viewChange() {
         const change = this.money - this.price;
@@ -195,6 +218,7 @@ class ViewOfSelectBtn {
         this.coinsWindowEl.innerText = change;
         this.numWindowEl.innerText = '';
     }
+    // 구매가능한 메뉴 업데이트
     updatePossible(change) {
         this.viewOfWallet.removePossible();
         this.viewOfWallet.viewPossibleMenu(change);
@@ -203,9 +227,12 @@ class ViewOfSelectBtn {
     closeAlert({target}) {
         const id = target.parentElement.parentElement.id;
         if( id === 'alert_money') this.alertMoneyEl.classList.add('hidden');
-        else {
+        else if (id === 'alert_num') {
             this.alertNumEl.classList.add('hidden');
             this.numWindowEl.innerText = '';
+        }
+        else {
+            this.alertSoldEl.classList.add('hidden');
         }
     }
 }
@@ -276,6 +303,7 @@ const viewOfNumber = new ViewOfNumber(reference);
 viewOfNumber.setBoardEvent();
 viewOfNumber.setNumBtnEvent();
 viewOfNumber.setDelBtnEvent();
+viewOfNumber.setSoldBtnEvent();
 
 const viewOfSelectBtn = new ViewOfSelectBtn(reference, menuData, walletData, viewOfWallet);
 viewOfSelectBtn.setSelectEvent();
