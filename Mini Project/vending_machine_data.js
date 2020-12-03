@@ -34,6 +34,7 @@ class WalletData {
         this.value = ['100', '500', '1000', '5000', '10000']; 
         this.moneyNumArr = [];
         this.total;
+        this.sales = 0;
         this.coinsWindow = 0;
     }
     // 개수, 배열, 총합 구하는 함수
@@ -76,6 +77,7 @@ const reference = {
     moneyWrap: document.getElementsByClassName('money_wrap'),
     walletTotal: document.getElementById('total'),
     process: document.getElementById('process'),
+    sales: document.getElementById('sales'),
     coinsWindow: document.getElementById('coins_window'),
     numWindow: document.getElementById('num_window'),
     numberBtn: document.getElementsByClassName('number'),
