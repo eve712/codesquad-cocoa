@@ -206,7 +206,7 @@ class ViewOfSelectBtn {
         const soldItems = this.walletData.soldItems;
         this.soldItemsEl.innerHTML = ''; 
         soldItems.forEach(el => {
-            const text = `${el.number}번 ${el.name}: ${el.times}개`;
+            const text = ` ${el.name}: ${el.times}개`;
             this.soldItemsEl.innerHTML += `<span>${text}</span> <br>`;    
         });
     }
