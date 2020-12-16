@@ -84,6 +84,7 @@ class WalletData {
             this.soldItems.push(soldItem);
         }
         else this.soldItems[idx].times++;
+        console.log(this.soldItems);
     }
 }
 
@@ -116,5 +117,3 @@ console.log(menuData.menuDataArr);
 
 const walletData = new WalletData();
 walletData.initMoneyNum(4, 9, 2, 5); // 지갑의 초기값 설정
-console.log(walletData.moneyNumArr);
-console.log(walletData.total);
